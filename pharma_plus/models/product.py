@@ -1,3 +1,4 @@
+from ast import Try
 from datetime import datetime
 
 from pharma_plus import db
@@ -41,6 +42,30 @@ class Product(db.Model):
     # Supplement specific attributes (optional)
     is_supplement = db.Column(db.Boolean, default=False)
     supplement_type = db.Column(db.String(120), nullable=True)
+
+    @staticmethod
+    def add_to_inventory(
+        name, price, category, uses, is_supplement, supplement_type=None, image_url=None
+    ):
+        new_product = Product(
+            name=name,
+            price=price,
+            category=category,
+            uses=uses,
+            is_supplement=is_supplement,
+            supplement_type=supplement_type,
+            image_url=image_url,
+        )  # type: ignore
+        db.session.add(new_product)
+        db.session.commit()
+
+    @staticmethod
+    def add_stock(product_id, new_stock):
+        product = Product.query.get(product_id)
+        if product:
+            product.stock += new_stock
+            db.session.commit()
+        raise Exception("Product not found")
 
 
 class Order(db.Model):

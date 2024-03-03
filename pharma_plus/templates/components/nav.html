@@ -1,24 +1,58 @@
-<div class="navbar bg-base-100">
+<div class="navbar bg-blue-600">
   <div class="flex-1">
-    <a href="/" class="btn btn-ghost text-xl">💊 Pharma Plus</a>
-    <a href="#" class="btn btn-ghost text-xl">🔍 Search</a>
-    <a href="/about" class="btn btn-ghost text-xl">🩻 About</a>
+    <a href="{{url_for('pharma_plus.home')}}" class="btn btn-ghost text-xl"
+      >💊 Pharma Plus</a
+    >
+    <a href="{{url_for('search.searches')}}" class="btn btn-ghost text-xl"
+      >🔍 Search</a
+    >
+    <a href="{{url_for('pharma_plus.about')}}" class="btn btn-ghost text-xl"
+      >🩻 About</a
+    >
   </div>
   <div class="flex-none">
     <div class="dropdown dropdown-end">
       <div tabindex="0" role="button" class="avatar btn btn-circle btn-ghost">
         <div class="w-10 rounded-full">
-          ➕
-          <img alt="Login " src="#" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="h-10 w-10"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z"
+            />
+          </svg>
+          <!-- <img alt="Login " src="#" /> -->
         </div>
       </div>
       <ul
         tabindex="0"
         class="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-primary p-2 font-semibold shadow"
       >
-        <li><a class="inline-block text-center">🚼 Profile</a></li>
-        <li><a class="inline-block text-center">🏵️ Settings</a></li>
-        <li><a class="inline-block text-center">📤 Logout</a></li>
+        <!-- prettier-ignore -->
+        {% if session.current_user and session.current_user['_is_authenticated'] %}
+        <li><a href="#todo" class="inline-block text-center">🚼 Profile</a></li>
+        <li><a href="#todo" class="inline-block text-center">📤 Logout</a></li>
+        {% else %}
+        <li>
+          <a href="{{url_for('users.login')}}" class="inline-block text-center"
+            >Login</a
+          >
+        </li>
+        <li>
+          <a
+            href="{{url_for('users.register')}}"
+            class="inline-block text-center"
+            >Register</a
+          >
+        </li>
+        {% endif %}
       </ul>
     </div>
   </div>

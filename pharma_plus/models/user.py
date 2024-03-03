@@ -1,3 +1,5 @@
+from distutils.command import register
+
 from pharma_plus import db
 
 
@@ -34,6 +36,35 @@ class User(db.Model):
     weight = db.Column(db.Float, nullable=True)
     height = db.Column(db.Float, nullable=True)
     marital_status = db.Column(db.String(20), nullable=True)
+
+    @staticmethod
+    def is_unique_email(new_email: str):
+        return User.query.filter_by(email=new_email).first() is None
+
+    @staticmethod
+    def is_unique_username(new_username: str):
+        return User.query.filter_by(username=new_username).first() is None
+
+    @staticmethod
+    def register(type, first_name, last_name, username, email, password):
+        user = User(
+            type=type,
+            first_name=first_name,
+            last_name=last_name,
+            username=username,
+            email=email,
+            password=password,
+        )  # type: ignore
+        db.session.add(user)
+        db.session.commit()
+        return user
+
+    @staticmethod
+    def verify_login(ype, username, password):
+        user = User.query.filter_by(username=username).first()
+        if user and user.password == password and user.type == type:
+            return user
+        return None
 
 
 class RewardPoints(db.Model):
