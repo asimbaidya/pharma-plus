@@ -32,19 +32,8 @@ def create_app(config_class=Config):
         Notification,
         ProductSuggestion,
     )
-    from pharma_plus.models.product import (
-        Order,
-        Payment,
-        PrescribedOrder,
-        Prescription,
-        Product,
-    )
-    from pharma_plus.models.user import (
-        RewardPoints,
-        Subscription,
-        SubscriptionProduct,
-        User,
-    )
+    from pharma_plus.models.product import Order, Payment, Prescription, Product
+    from pharma_plus.models.user import RewardPoints, Subscription, User
 
     print("These Flowing are the models of This Application")
     # Print table names for models in other
@@ -52,11 +41,11 @@ def create_app(config_class=Config):
         print(f"Table Name: {model.__name__}")
 
     # Print table names for models in product
-    for model in [Order, Payment, PrescribedOrder, Prescription, Product]:
+    for model in [Order, Payment, Prescription, Product]:
         print(f"Table Name: {model.__name__}")
 
     # Print table names for models in user
-    for model in [RewardPoints, Subscription, SubscriptionProduct, User]:
+    for model in [RewardPoints, Subscription, User]:
         print(f"Table Name: {model.__name__}")
 
     return app

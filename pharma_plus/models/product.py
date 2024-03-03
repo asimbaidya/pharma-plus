@@ -7,11 +7,6 @@ order_product = db.Table(
     db.Column("order_id", db.Integer, db.ForeignKey("order.id")),
     db.Column("product_id", db.Integer, db.ForeignKey("product.id")),
 )
-prescribed_order_product = db.Table(
-    "prescribed_order_product",
-    db.Column("order_id", db.Integer, db.ForeignKey("order.id")),
-    db.Column("product_id", db.Integer, db.ForeignKey("product.id")),
-)
 
 
 class Product(db.Model):
@@ -26,6 +21,7 @@ class Product(db.Model):
     # related to sells
     stock = db.Column(db.Integer, nullable=False)
     monthly_sell_frequency = db.Column(db.Integer, nullable=True)
+    stock_alert = db.Column(db.Integer, nullable=True)
 
     # brand info
     brand_name = db.Column(db.String(120), nullable=True)
@@ -71,22 +67,6 @@ class Prescription(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     image_url = db.Column(db.String(255), nullable=False)
     confirmed = db.Column(db.Boolean, default=False)
-
-
-class PrescribedOrder(db.Model):
-    # basic info
-    id = db.Column(db.Integer, primary_key=True)
-
-    # delivery
-    order_delivery_date = db.Column(db.DateTime, nullable=False)
-    order_received_timestamp = db.Column(db.DateTime, default=datetime.utcnow)
-    order_complated_timestamp = db.Column(db.DateTime, nullable=True)
-
-    # payment
-    status = db.Column(db.String(20), nullable=False)
-    total_bil = db.Column(db.Integer, nullable=False)
-
-    orders = db.relationship("Order", secondary=prescribed_order_product)
 
 
 class Payment(db.Model):

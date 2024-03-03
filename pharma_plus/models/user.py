@@ -42,13 +42,11 @@ class RewardPoints(db.Model):
     reward_points = db.Column(db.Integer, nullable=False)
 
 
-# for subscription
-class SubscriptionProduct(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    subscription_id = db.Column(
-        db.Integer, db.ForeignKey("subscription.id"), nullable=False
-    )
-    product_id = db.Column(db.Integer, db.ForeignKey("product.id"), nullable=False)
+subscription_product = db.Table(
+    "subscription_product",
+    db.Column("subscription_id", db.Integer, db.ForeignKey("subscription.id")),
+    db.Column("product_id", db.Integer, db.ForeignKey("product.id")),
+)
 
 
 class Subscription(db.Model):
@@ -59,5 +57,5 @@ class Subscription(db.Model):
     active = db.Column(db.Boolean, default=True)
 
     products = db.relationship(
-        "Product", secondary=SubscriptionProduct, backref="subscribers"
+        "Product", secondary=subscription_product, backref="subscribers"
     )
