@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" data-theme="corporate">
+  <head>
+    <!-- prettier-ignore -->
+    <!-- metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- tailwind -->
+    <link
+      href="{{ url_for('static',filename='lib/tailwind/build/out.css') }}"
+      rel="stylesheet"
+    />
+
+    <!-- Include Flatpickr from CDN(for date time picking in form)-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  </head>
+
+  <body id="body">
+    <!-- nav -->
+    {% include 'components/nav.html' %}
+    <!-- the main container that keep all content(top level) -->
+    <!-- prettier-ignore -->
+    <div id="_content" class="min-h-full slide-it">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
+</html>
