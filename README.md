@@ -1,8 +1,8 @@
 # pharma-plus
 
-## Features List for Medicine delivery system
+## Tentative Features List for Medicine Delivery Dystem
 
-- [ ] 0.1 Flask Project structured flowing MVC pattern
+- [x] 0.1 Flask Project structured flowing(enforcing) MVC pattern
 
 ```text
 ├── models // => M
@@ -32,12 +32,22 @@
 ```
 
 - [x] 0.2 all required model are identified and created
+- [x] 0.3 dummy data generator for users and product
+
+---
 
 - [ ] 1. User Registration And Authentication(via email)
+  - [x] 1.1 Routes for Authentication
+  - [x] 1.2 View files and markup for Login forms
+  - [x] 1.2 custom session data class for tracking user session
+  - [ ] 1.2 form submission and backend login for Authentication
 - [ ] 2. User Profile Management And Preference Setting(Information update)
-- [ ] 3. Role Based Homepage and User Interface(For Delivery Personnel/Admin/Users)
+- [ ] 3. Role Based Homepage(Profile Page) and User Interface(For Delivery Personnel/Admin/Users)
 - [ ] 4. Medicine Inventory Management(adding medicine with image and desc.)
 - [ ] 5. Insight on Medicine Storage and Notification For Low Inventory(Based on Sales Rate)
+
+---
+
 - [ ] 6. Browsing Search And Filtering medicines and Supplements
 - [ ] 7. Ordering Medicines And Cart Management(for Over-the-counter Medicines)
 - [ ] 8. Prescription Upload And Medicine Availity Validation(Prescribed Medicine Ordering)
