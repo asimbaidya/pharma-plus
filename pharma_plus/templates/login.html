@@ -2,7 +2,7 @@
 {% extends 'components/layout.html' %}
 {% block content %}
 
-<div class="mx-auto max-w-screen-md bg-secondary">
+<div class="mx-auto max-w-screen-md bg-sky-500 text-xl">
   <form method="POST" action="" class="p-8">
     <!-- username -->
     <div class="form-control">
@@ -23,11 +23,12 @@
             clip-rule="evenodd"
           />
         </svg>
-        <input class="grow" name="password" required type="password" value="password" />
+        <input class="grow" name="password" required type="password" placeholder="password" />
       </label>
     </div>
+    <!-- user Type -->
     <div class="form-control mt-2">
-      <select class="select select-bordered" id="user_type" name="user_type">
+      <select class="select select-bordered text-xl" id="user_type" name="user_type">
         <option disabled>Select Type</option>
         <option value="admin">Admin</option>
         <option value="customer" selected>Customer</option>
@@ -35,11 +36,11 @@
       </select>
     </div>
     <button class="btn btn-primary mx-auto mt-2 p-1 px-8" type="submit">Login</button>
-    <a class="btn-ghost link m-4" href="">Forgot Password?</a>
+    <a class="btn-ghost link m-4" href="#todo">Forgot Password?</a>
   </form>
 </div>
 
 <div class="mt-4 flex items-center justify-center">
-  <a class="btn btn-link btn-secondary no-underline hover:text-xs hover:no-underline" href='{{ url_for("users.register") }}'>Don't have a accoutt? Join</a>
+  <a class="btn btn-secondary no-underline hover:text-xs hover:no-underline" href='{{ url_for("users.register") }}'>Don't have a accoutt? Join</a>
 </div>
 {% endblock content %}

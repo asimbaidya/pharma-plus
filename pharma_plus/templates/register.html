@@ -2,25 +2,35 @@
 {% extends 'components/layout.html' %}
 {% block content %}
 
-<div class="mx-auto max-w-screen-md bg-secondary">
+<div class="mx-auto max-w-screen-md bg-sky-500">
   <form method="POST" class="p-14" action="{{ url_for('users.register' ) }}">
     <div class="mb-3">
+      <!-- First name -->
       <label for="first_name" class="form-label">First Name</label>
       <input type="text" class="form-control rounded-sm p-1" name="first_name" required />
     </div>
     <div class="mb-3">
+      <!-- Last name -->
       <label for="last_name" class="form-label">Last Name</label>
       <input type="text" class="form-control rounded-sm p-1" name="last_name" required />
     </div>
     <div class="mb-3">
+      <!-- User Name -->
       <label for="ClientName" class="form-label">User Name</label>
       <input type="text" class="form-control rounded-sm p-1" name="username" required />
     </div>
     <div class="mb-3">
+      <!-- Email Address -->
       <label for="Email1" class="form-label">Email address</label>
       <input type="email" class="form-control rounded-sm p-1" name="email" required />
     </div>
     <div class="mb-3">
+      <!-- Email Address -->
+      <label for="Email1" class="form-label">Phone Number</label>
+      <input type="number" class="form-control rounded-sm p-1" name="Phone" required />
+    </div>
+    <div class="mb-3">
+      <!-- password -->
       <label for="Password1" class="form-label">Password</label>
       <input type="password" class="form-control rounded-sm p-1" name="password" required />
     </div>

@@ -18,17 +18,17 @@
           <!-- <img alt="Login " src="#" /> -->
         </div>
       </div>
-      <ul tabindex="0" class="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-primary p-2 font-semibold shadow">
+      <ul tabindex="0" class="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box p-2 font-semibold shadow backdrop-blur-sm">
         <!-- prettier-ignore -->
         {% if session.current_user and session.current_user['_is_authenticated'] %}
-        <li><a href="#todo" class="inline-block text-center">🚼 Profile</a></li>
-        <li><a href="#todo" class="inline-block text-center">📤 Logout</a></li>
+        <li><a href="#todo" class="inline-block p-4 text-center hover:bg-primary">🚼 Profile</a></li>
+        <li><a href="{{ url_for('users.logout') }}" class="inline-block p-4 text-center hover:bg-primary">📤 Logout</a></li>
         {% else %}
         <li>
-          <a href="{{url_for('users.login')}}" class="inline-block text-center">Login</a>
+          <a href="{{url_for('users.login')}}" class="inline-block p-4 text-center hover:bg-primary">Login</a>
         </li>
         <li>
-          <a href="{{url_for('users.register')}}" class="inline-block text-center">Register</a>
+          <a href="{{url_for('users.register')}}" class="inline-block p-4 text-center hover:bg-primary">Register</a>
         </li>
         {% endif %}
       </ul>

@@ -1,6 +1,9 @@
 from distutils.command import register
 
+from werkzeug.security import check_password_hash
+
 from pharma_plus import db
+from pharma_plus.utility.user_session_manager import CurrentUser
 
 
 class User(db.Model):
@@ -47,6 +50,10 @@ class User(db.Model):
 
     @staticmethod
     def register(type, first_name, last_name, username, email, password):
+
+        if not User.is_unique_email(email) or not User.is_unique_username(username):
+            return False
+
         user = User(
             type=type,
             first_name=first_name,
@@ -57,13 +64,27 @@ class User(db.Model):
         )  # type: ignore
         db.session.add(user)
         db.session.commit()
-        return user
+        return True
 
     @staticmethod
-    def verify_login(ype, username, password):
-        user = User.query.filter_by(username=username).first()
-        if user and user.password == password and user.type == type:
-            return user
+    def verify_login(username, password, user_type):
+        user: User = User.query.filter_by(username=username).first()
+        if (
+            user
+            and check_password_hash(user.password, password)
+            and user.type == user_type
+        ):
+            # todo: add to session
+            profile_image = "#todo"
+            CurrentUser.login(
+                id=user.id,
+                username=user.username,
+                profile_image=profile_image,
+                is_admin=user.type == user_type,
+                is_customer=user.type == user_type,
+                is_delivery_personnel=user.type == user_type,
+            )
+            return True
         return None
 
 

@@ -1,5 +1,7 @@
 from datetime import datetime
 
+from werkzeug.security import generate_password_hash
+
 
 def add_dummy_users(db, User):
     # dummy user 1
@@ -7,9 +9,9 @@ def add_dummy_users(db, User):
         type="customer",
         first_name="John",
         last_name="Doe",
-        username="john_doe",
+        username="user1",
         email="john.doe@example.com",
-        password="secret",
+        password=generate_password_hash("secret"),
         phone="1234567890",
         location="City, Country",
         gender="Male",
@@ -26,9 +28,9 @@ def add_dummy_users(db, User):
         type="admin",
         first_name="Jane",
         last_name="Smith",
-        username="jane_smith",
+        username="admin1",
         email="jane.smith@example.com",
-        password="secret",
+        password=generate_password_hash("secret"),
         phone="9876543210",
         location="Another City, Country",
         gender="Female",
@@ -43,9 +45,9 @@ def add_dummy_users(db, User):
         type="delivery_personel",
         first_name="David",
         last_name="Johnson",
-        username="david_johnson",
+        username="stuff1",
         email="david.johnson@example.com",
-        password="secret",
+        password=generate_password_hash("secret"),
         phone="5555555555",
         location="City, Country",
         gender="Male",
