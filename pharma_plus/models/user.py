@@ -1,5 +1,3 @@
-from distutils.command import register
-
 from werkzeug.security import check_password_hash
 
 from pharma_plus import db
@@ -49,18 +47,15 @@ class User(db.Model):
         return User.query.filter_by(username=new_username).first() is None
 
     @staticmethod
-    def register(type, first_name, last_name, username, email, password):
-
-        if not User.is_unique_email(email) or not User.is_unique_username(username):
-            return False
+    def register(first_name, last_name, username, email, password, type="customer"):
 
         user = User(
-            type=type,
             first_name=first_name,
             last_name=last_name,
             username=username,
             email=email,
             password=password,
+            type=type,
         )  # type: ignore
         db.session.add(user)
         db.session.commit()

@@ -1,4 +1,5 @@
 from flask import Blueprint, flash, redirect, render_template, request, session, url_for
+from werkzeug.security import generate_password_hash
 
 from pharma_plus.models.user import User
 from pharma_plus.utility.user_session_manager import CurrentUser
@@ -11,6 +12,38 @@ users = Blueprint("users", __name__)
 # for extreme security measure :) & simplicity
 @users.route("/register", methods=["GET", "POST"])
 def register():
+    if CurrentUser.is_authenticated():
+        flash("You are alread logged in!", "info")
+        return redirect(url_for("pharma_plus.home"))
+
+    if request.method == "POST":
+        first_name = request.form["first_name"]
+        last_name = request.form["last_name"]
+        username = request.form["username"]
+        email = request.form["email"]
+        password = request.form["password"]
+        hashed_password = generate_password_hash(password)
+
+        if not User.is_unique_username(username):
+            flash("A User with same username already exists", "info")
+            return redirect(url_for("users.register"))
+        if not User.is_unique_email(email):
+            flash("Email already exists", "info")
+            return redirect(url_for("users.register"))
+
+        # all good
+        if User.register(
+            first_name=first_name,
+            last_name=last_name,
+            username=username,
+            email=email,
+            password=hashed_password,
+        ):
+            flash("Account created successfully", "info")
+            return redirect(url_for("users.login"))
+        else:
+            flash("Server error! Please  try again :(", "info")
+
     return render_template("register.html")
 
 
