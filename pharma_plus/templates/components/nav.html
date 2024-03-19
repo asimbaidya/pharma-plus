@@ -1,27 +1,14 @@
 <div class="navbar bg-blue-600">
   <div class="flex-1">
-    <a href="{{url_for('pharma_plus.home')}}" class="btn btn-ghost text-xl"
-      >💊 Pharma Plus</a
-    >
-    <a href="{{url_for('search.searches')}}" class="btn btn-ghost text-xl"
-      >🔍 Search</a
-    >
-    <a href="{{url_for('pharma_plus.about')}}" class="btn btn-ghost text-xl"
-      >🩻 About</a
-    >
+    <a href="{{url_for('pharma_plus.home')}}" class="btn btn-ghost text-xl">💊 Pharma Plus</a>
+    <a href="{{url_for('search.searches')}}" class="btn btn-ghost text-xl">🔍 Search</a>
+    <a href="{{url_for('pharma_plus.about')}}" class="btn btn-ghost text-xl">🩻 About</a>
   </div>
   <div class="flex-none">
     <div class="dropdown dropdown-end">
       <div tabindex="0" role="button" class="avatar btn btn-circle btn-ghost">
         <div class="w-10 rounded-full">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="h-10 w-10"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-10 w-10">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -31,26 +18,17 @@
           <!-- <img alt="Login " src="#" /> -->
         </div>
       </div>
-      <ul
-        tabindex="0"
-        class="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-primary p-2 font-semibold shadow"
-      >
+      <ul tabindex="0" class="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-primary p-2 font-semibold shadow">
         <!-- prettier-ignore -->
         {% if session.current_user and session.current_user['_is_authenticated'] %}
         <li><a href="#todo" class="inline-block text-center">🚼 Profile</a></li>
         <li><a href="#todo" class="inline-block text-center">📤 Logout</a></li>
         {% else %}
         <li>
-          <a href="{{url_for('users.login')}}" class="inline-block text-center"
-            >Login</a
-          >
+          <a href="{{url_for('users.login')}}" class="inline-block text-center">Login</a>
         </li>
         <li>
-          <a
-            href="{{url_for('users.register')}}"
-            class="inline-block text-center"
-            >Register</a
-          >
+          <a href="{{url_for('users.register')}}" class="inline-block text-center">Register</a>
         </li>
         {% endif %}
       </ul>

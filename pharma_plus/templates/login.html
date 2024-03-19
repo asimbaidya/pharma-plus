@@ -7,47 +7,23 @@
     <!-- username -->
     <div class="form-control">
       <label class="input input-bordered flex items-center gap-2">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 16 16"
-          fill="currentColor"
-          class="h-4 w-4 opacity-70"
-        >
-          <path
-            d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z"
-          />
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70">
+          <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
         </svg>
-        <input
-          type="text"
-          class="grow"
-          placeholder="Username"
-          name="username"
-          required
-        />
+        <input type="text" class="grow" placeholder="Username" name="username" required />
       </label>
     </div>
     <!-- password -->
     <div class="form-control mt-2">
       <label class="input input-bordered flex items-center gap-2">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 16 16"
-          fill="currentColor"
-          class="h-4 w-4 opacity-70"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70">
           <path
             fill-rule="evenodd"
             d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
             clip-rule="evenodd"
           />
         </svg>
-        <input
-          class="grow"
-          name="password"
-          required
-          type="password"
-          value="password"
-        />
+        <input class="grow" name="password" required type="password" value="password" />
       </label>
     </div>
     <div class="form-control mt-2">
@@ -58,18 +34,12 @@
         <option value="delivery personnel">Delivery Personnel</option>
       </select>
     </div>
-    <button class="btn btn-primary mx-auto mt-2 p-1 px-8" type="submit">
-      Login
-    </button>
+    <button class="btn btn-primary mx-auto mt-2 p-1 px-8" type="submit">Login</button>
     <a class="btn-ghost link m-4" href="">Forgot Password?</a>
   </form>
 </div>
 
 <div class="mt-4 flex items-center justify-center">
-  <a
-    class="btn btn-link btn-secondary no-underline hover:text-xs hover:no-underline"
-    href='{{ url_for("users.register") }}'
-    >Don't have a accoutt? Join</a
-  >
+  <a class="btn btn-link btn-secondary no-underline hover:text-xs hover:no-underline" href='{{ url_for("users.register") }}'>Don't have a accoutt? Join</a>
 </div>
 {% endblock content %}
