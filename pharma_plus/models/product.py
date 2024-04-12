@@ -78,6 +78,12 @@ class Order(db.Model):
     order_complated_timestamp = db.Column(db.DateTime, nullable=True)
     delivery_address = db.Column(db.String(255), nullable=False)
 
+    # ? information of delivery personel
+    # ? information of admin(who approved)
+    # ? of user(who ordered!)
+
+    ## different order for Subscription ??
+
     # payment
     status = db.Column(db.String(20), nullable=False)
     total_bil = db.Column(db.Integer, nullable=False)

@@ -1,7 +1,6 @@
-from werkzeug.security import check_password_hash
-
 from pharma_plus import db
 from pharma_plus.utility.user_session_manager import CurrentUser
+from werkzeug.security import check_password_hash
 
 
 class User(db.Model):
@@ -48,7 +47,6 @@ class User(db.Model):
 
     @staticmethod
     def register(first_name, last_name, username, email, password, type="customer"):
-
         user = User(
             first_name=first_name,
             last_name=last_name,
@@ -102,6 +100,10 @@ class Subscription(db.Model):
 
     start_date = db.Column(db.DateTime, nullable=False)
     active = db.Column(db.Boolean, default=True)
+
+    # frequency?
+    # payment ?
+    # confirm ?
 
     products = db.relationship(
         "Product", secondary=subscription_product, backref="subscribers"
