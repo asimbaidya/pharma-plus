@@ -10,6 +10,8 @@ users = Blueprint("users", __name__)
 # Only customers will be able to register through this route
 # admin, adn delivery personel will be added by the admin manually
 # for extreme security measure :) & simplicity
+
+
 @users.route("/register", methods=["GET", "POST"])
 def register():
     if CurrentUser.is_authenticated():
@@ -75,6 +77,7 @@ def login():
 @users.route("/logout", methods=["GET"])
 def logout():
     session.clear()
+    flash("logged Out Succesfully!", "info")
     return redirect(url_for("pharma_plus.home"))
 
 

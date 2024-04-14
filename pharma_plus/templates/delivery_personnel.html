@@ -1,0 +1,20 @@
+<!-- prettier-ignore -->
+{% extends 'components/layout.html' %}
+{% block content %}
+
+<div class="container mx-auto mt-2">
+  <div class="rounded-md bg-slate-400 p-8 shadow-md">
+    <img src="{{ profile_image }}" alt="Profile Image" class="mx-auto mb-4 h-20 w-20 rounded-full transition duration-300 ease-in-out hover:scale-105 hover:transform" />
+    <h1 class="text-center text-2xl font-semibold hover:scale-110 hover:transform">{{ delivery_personnel.first_name }} {{ delivery_personnel.last_name }}</h1>
+    <p class="text-center text-gray-800 hover:scale-110 hover:transform">@{{ delivery_personnel.username }}</p>
+
+    <div class="mt-6">
+      <h2 class="mb-2 text-lg font-semibold">Contact Information</h2>
+      <p>Email: {{ delivery_personnel.email }}</p>
+      <p>Phone: {{ delivery_personnel.phone or 'N/A' }}</p>
+      <p>Location: {{ delivery_personnel.location or 'N/A' }}</p>
+    </div>
+  </div>
+</div>
+
+{% endblock content%}

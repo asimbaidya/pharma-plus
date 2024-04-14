@@ -92,3 +92,9 @@ class CurrentUser:
             current_user["profile_image"] = profile_image
             session["current_user"] = current_user
         raise Exception("Can not update profile image, Not logged in")
+
+    @staticmethod
+    def match_username(username: str):
+        # considering this will be called with login required decorator, so current_user will be not None!
+        current_user = session.get("current_user")
+        return username == current_user["username"]
