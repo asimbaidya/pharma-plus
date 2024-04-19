@@ -1,6 +1,7 @@
 from werkzeug.security import check_password_hash
 
 from pharma_plus import db
+from pharma_plus.utility.user_cart_manager import Cart
 from pharma_plus.utility.user_session_manager import CurrentUser
 
 
@@ -78,6 +79,11 @@ class User(db.Model):
                 is_customer=user.type == "customer",
                 is_delivery_personnel=user.type == "delivery personnel",
             )
+
+            # if user is customer, iniiate a cart, so customer can add products
+            if user.type == "customer":
+                Cart.init_cart()
+
             return True
         return None
 
