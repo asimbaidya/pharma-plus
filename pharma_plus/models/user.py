@@ -1,6 +1,7 @@
+from werkzeug.security import check_password_hash
+
 from pharma_plus import db
 from pharma_plus.utility.user_session_manager import CurrentUser
-from werkzeug.security import check_password_hash
 
 
 class User(db.Model):
@@ -73,9 +74,9 @@ class User(db.Model):
                 id=user.id,
                 username=user.username,
                 profile_image=profile_image,
-                is_admin=user.type == user_type,
-                is_customer=user.type == user_type,
-                is_delivery_personnel=user.type == user_type,
+                is_admin=user.type == "admin",
+                is_customer=user.type == "customer",
+                is_delivery_personnel=user.type == "delivery personnel",
             )
             return True
         return None
