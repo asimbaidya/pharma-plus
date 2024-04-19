@@ -12,3 +12,6 @@ node_modules
 # mac stuff
 .DS_Store
 
+
+
+pharma_plus/static/media/

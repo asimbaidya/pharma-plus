@@ -37,6 +37,8 @@
         <li>
           <a href="{{ url_for('admin.profile',username=session.current_user['username'] ) }}" class="inline-block p-4 text-center hover:bg-primary">🚼 Admin: {{session.current_user['username']}}</a>
         </li>
+        <li><a href="{{ url_for('products.add_new' ) }}" class="inline-block p-4 text-center hover:bg-primary">🆕 Add Inventory</a></li>
+
         {% elif session.current_user['_is_customer'] %}
         <li><a href="#todo" class="inline-block p-4 text-center hover:bg-primary">🚼 Customr: {{session.current_user['username']}}</a></li>
         {% elif session.current_user['_is_delivery_personnel'] %}

@@ -1,7 +1,81 @@
 <!-- prettier-ignore -->
 {% extends 'components/layout.html' %}
 {% block content %}
-
-<!--  -->
+<div class="mx-auto max-w-lg overflow-hidden rounded-lg bg-white shadow-lg">
+  <div class="px-6 py-4">
+    <h2 class="mb-2 text-2xl font-bold">Add New Product</h2>
+    <form action="{{ url_for('products.add_new' ) }}" enctype="multipart/form-data" method="post">
+      <!-- Product Name -->
+      <div class="mb-4">
+        <label for="name" class="mb-2 block font-bold text-gray-700">Item Name</label>
+        <input type="text" name="name" id="name" class="w-full rounded-lg border px-3 py-2 focus:border-blue-500 focus:outline-none" required />
+      </div>
+      <!-- Brand Name -->
+      <div class="mb-4">
+        <label for="brand_name" class="mb-2 block font-bold text-gray-700">Brand Name</label>
+        <input type="text" name="brand_name" id="brand_name" class="w-full rounded-lg border px-3 py-2 focus:border-blue-500 focus:outline-none" required />
+      </div>
+      <!-- Description -->
+      <div class="mb-4">
+        <label for="description" class="mb-2 block font-bold text-gray-700">Description</label>
+        <textarea name="description" id="description" rows="3" class="w-full rounded-lg border px-3 py-2 focus:border-blue-500 focus:outline-none" required></textarea>
+      </div>
+      <!-- Image Upload -->
+      <div class="mb-4">
+        <label for="image" class="mb-2 block font-bold text-gray-700">Upload Image</label>
+        <input type="file" name="image" id="image" accept="image/*" class="w-full rounded-lg border px-3 py-2 focus:border-blue-500 focus:outline-none" required />
+      </div>
+      <!-- Price -->
+      <div class="mb-4">
+        <label for="price" class="mb-2 block font-bold text-gray-700">Price</label>
+        <input type="number" name="price" id="price" class="w-full rounded-lg border px-3 py-2 focus:border-blue-500 focus:outline-none" required />
+      </div>
+      <!-- Stock -->
+      <div class="mb-4">
+        <label for="stock" class="mb-2 block font-bold text-gray-700">Stock</label>
+        <input type="number" name="stock" id="stock" class="w-full rounded-lg border px-3 py-2 focus:border-blue-500 focus:outline-none" required />
+      </div>
+      <!-- Category -->
+      <div class="mb-4">
+        <label for="category" class="mb-2 block font-bold text-gray-700">Category</label>
+        <input type="text" name="category" id="category" class="w-full rounded-lg border px-3 py-2 focus:border-blue-500 focus:outline-none" required />
+      </div>
+      <!-- Generic Name -->
+      <div class="mb-4">
+        <label for="generic_name" class="mb-2 block font-bold text-gray-700">Generic Name</label>
+        <input type="text" name="generic_name" id="generic_name" class="w-full rounded-lg border px-3 py-2 focus:border-blue-500 focus:outline-none" required />
+      </div>
+      <!-- Dosage -->
+      <div class="mb-4">
+        <label for="dosage" class="mb-2 block font-bold text-gray-700">Dosage</label>
+        <input type="text" name="dosage" id="dosage" class="w-full rounded-lg border px-3 py-2 focus:border-blue-500 focus:outline-none" required />
+      </div>
+      <!-- Side Effects -->
+      <div class="mb-4">
+        <label for="side_effects" class="mb-2 block font-bold text-gray-700">Side Effects</label>
+        <textarea name="side_effects" id="side_effects" rows="3" class="w-full rounded-lg border px-3 py-2 focus:border-blue-500 focus:outline-none" required></textarea>
+      </div>
+      <!-- Is Medicine -->
+      <div class="mb-4">
+        <label for="is_medicine" class="mb-2 block font-bold text-gray-700">Is Medicine</label>
+        <input type="checkbox" name="is_medicine" id="is_medicine" class="mr-2 leading-tight" />
+      </div>
+      <!-- Is Prescription Required -->
+      <div class="mb-4">
+        <label for="is_prescription_required" class="mb-2 block font-bold text-gray-700">Is Prescription Required?</label>
+        <input type="checkbox" name="is_prescription_required" id="is_prescription_required" class="mr-2 leading-tight" />
+      </div>
+      <!-- Is Supplement -->
+      <div class="mb-4">
+        <label for="is_supplement" class="mb-2 block font-bold text-gray-700">Is Supplement ?</label>
+        <input type="checkbox" name="is_supplement" id="is_supplement" class="mr-2 leading-tight" />
+      </div>
+      <!-- Submit Button -->
+      <div class="flex justify-end">
+        <button type="submit" class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-600 focus:outline-none">Add Product</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 {% endblock content%}

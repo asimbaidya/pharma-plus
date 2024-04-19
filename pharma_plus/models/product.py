@@ -44,23 +44,46 @@ class Product(db.Model):
     supplement_type = db.Column(db.String(120), nullable=True)
 
     @staticmethod
+    def save_product_image(image):
+        image.save("static/media/products/" + image.filename)
+        return "/static/images/" + image.filename
+
+    @staticmethod
     def add_to_inventory(
-        name, price, category, uses, is_supplement, supplement_type=None, image_url=None
+        name,
+        brand_name,
+        description,
+        image_url,
+        price,
+        stock,
+        category,
+        generic_name,
+        dosage,
+        side_effects,
+        is_medicine,
+        is_prescription_required,
+        is_supplement,
     ):
         new_product = Product(
             name=name,
-            price=price,
-            category=category,
-            uses=uses,
-            is_supplement=is_supplement,
-            supplement_type=supplement_type,
+            brand_name=brand_name,
+            description=description,
             image_url=image_url,
-        )  # type: ignore
+            price=price,
+            stock=stock,
+            category=category,
+            generic_name=generic_name,
+            dosage=dosage,
+            side_effects=side_effects,
+            is_medicine=is_medicine,
+            is_prescription_required=is_prescription_required,
+            is_supplement=is_supplement,
+        )
         db.session.add(new_product)
         db.session.commit()
 
     @staticmethod
-    def add_stock(product_id, new_stock):
+    def update_inventory(product_id, new_stock):
         product = Product.query.get(product_id)
         if product:
             product.stock += new_stock
