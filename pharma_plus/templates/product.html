@@ -78,8 +78,9 @@
       {% if session.current_user['_is_customer'] %}
       {% if Cart.is_product_in_cart(product.id) %}
       <a class="btn btn-primary" href="{{ url_for('cart.decrease',product_id=product.id ) }}">Decrease</a>
-      <button class="btn btn-secondary w-20">{{Cart.get_product_quantity(product.id)}}</button>
+      <button class="btn btn-secondary">In Cart: {{Cart.get_product_quantity(product.id)}}</button>
       <a class="btn btn-primary" href="{{ url_for('cart.increase',product_id=product.id ) }}">Increase</a>
+      <a class="btn btn-info" href="{{ url_for('cart.show_cart' ) }}">Check Out</a>
       {% else %}
 
       <a class="btn btn-primary" href="{{ url_for('cart.add_to_cart',product_id=product.id ) }}">Add to Cart</a>
