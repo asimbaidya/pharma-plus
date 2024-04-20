@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tailwind": "npx tailwindcss -i ./pharma_plus/static/lib/tailwind/src.css -o ./pharma_plus/static/lib/tailwind/build/out.css --watch"
+    "tailwind": "npx tailwindcss -i ./pharma_plus/static/lib/tailwind/src.css -o ./pharma_plus/static/lib/tailwind/build/out.css --watch",
+    "tailwindbuild": "npx tailwindcss -i ./pharma_plus/static/lib/tailwind/src.css -o ./pharma_plus/static/lib/tailwind/build/out.css"
   },
   "keywords": [],
   "author": "",
