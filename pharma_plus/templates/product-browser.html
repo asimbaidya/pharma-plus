@@ -6,14 +6,16 @@
   <h1 class="mb-8 text-center text-3xl font-bold">Browse Items</h1>
   <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
     {% for product in products %}
-    <div class="rounded-lg bg-white shadow-md">
-      <img src="{{ product.image_url }}" alt="{{ product.name }}" class="h-48 w-full rounded-t-lg object-cover" />
-      <div class="p-4">
-        <h2 class="text-lg font-semibold">{{ product.name }}</h2>
-        <p class="text-gray-600">{{ product.brand_name }}</p>
-        <p class="mt-2 font-bold text-gray-900">${{ product.price }}</p>
+    <a href="{{ url_for('products.product',product_id=product.id ) }}">
+      <div class="rounded-lg bg-white shadow-md">
+        <img src="{{ product.image_url }}" alt="{{ product.name }}" class="h-48 w-full rounded-t-lg object-cover" />
+        <div class="p-4">
+          <h2 class="text-lg font-semibold">{{ product.name }}</h2>
+          <p class="text-gray-600">{{ product.brand_name }}</p>
+          <p class="mt-2 font-bold text-gray-900">${{ product.price }}</p>
+        </div>
       </div>
-    </div>
+    </a>
     {% endfor %}
   </div>
 </div>

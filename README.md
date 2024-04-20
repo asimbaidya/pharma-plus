@@ -48,25 +48,26 @@
 
 ---
 
-- [ ] 6. Browsing Search And Filtering medicines and Supplements
+- [ ] 6. Browsing Search and live feedback
 - [ ] 7. Ordering Medicines And Cart Management(for Over-the-counter Medicines)
-- [ ] 8. Prescription Upload And Medicine Availity Validation(Prescribed Medicine Ordering)
 - [ ] 9. Order Placing from carts and Prescribed Medicines
 - [ ] 10. User's Order History Management and Overview
-- [ ] 11. Individual Dosage Tracking And Insights(based on order and collected info)
 - [ ] 12. Scheduled Delivery Options and Subscription For Long Term Medicines
 - [ ] 13. Reminder Notifications For Subscription-Based Users
-- [ ] 14. Refund And Return Policy and Cancelation of orders, Subscriptions (based on condition)
 - [ ] 15. Purchase Based Rewards Points and Discount System based on User's Points
 - [ ] 16. Pseudo Payment Gateway Integration
 - [ ] 17. Location Based anonymous Disease Tracking and Insights in the Area(Pseudo)
 - [ ] 18. Delivery Movement Status and Tracking for Users
-- [ ] 19. ^ General Advisory Or Information For Over-the-counter Medicines
 - [ ] 20. Notification System And Email With Advertisement, Awareness
 - [ ] 21. Timely Reporting And Analytics Of Sells based on collected sales data to Admins
 - [ ] 22. Feedback And Rating for the whole website and services
 - [ ] 23. Admin Dashboard with Overall Analysis and Feedback
+
+- [ ] 19. ^ General Advisory Or Information For Over-the-counter Medicines
 - [ ] 24. Based on users Activity, Product Suggestion such as Protein Powder, Multivitamins, Supplements, et
+- [ ] 14. Refund And Return Policy and Cancelation of orders, Subscriptions (based on condition)
+- [ ] 11. Individual Dosage Tracking And Insights(based on order and collected info)
+- [ ] 8. Prescription Upload And Medicine Availity Validation(Prescribed Medicine Ordering)
 
 ## Setup(once)
 

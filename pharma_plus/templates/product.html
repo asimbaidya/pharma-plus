@@ -2,6 +2,79 @@
 {% extends 'components/layout.html' %}
 {% block content %}
 
+<div class="mx-auto max-w-xl overflow-hidden rounded-lg bg-white shadow-lg">
+  <img class="h-64 w-full object-cover object-center" src="{{ product.image_url }}" alt="{{ product.name }}" />
+  <div class="p-4">
+    <table class="w-full table-auto border border-gray-300">
+      <tbody>
+        <tr>
+          <td class="border-b border-r border-gray-300 font-bold text-gray-900">Name</td>
+          <td class="border-b border-gray-300 pl-2">{{ product.name }}</td>
+        </tr>
+        <tr>
+          <td class="border-b border-r border-gray-300 font-bold text-gray-900">Description</td>
+          <td class="border-b border-gray-300 pl-2">{{ product.description }}</td>
+        </tr>
+        <tr>
+          <td class="border-b border-r border-gray-300 font-bold text-gray-900">Price</td>
+          <td class="border-b border-gray-300 pl-2">{{ product.price }}</td>
+        </tr>
+        <tr>
+          <td class="border-b border-r border-gray-300 font-bold text-gray-900">Stock</td>
+          <td class="border-b border-gray-300 pl-2">{{ product.stock }}</td>
+        </tr>
+        <tr>
+          <td class="border-b border-r border-gray-300 font-bold text-gray-900">Monthly Sells</td>
+          <td class="border-b border-gray-300 pl-2">{{ product.monthly_sell_frequency }}</td>
+        </tr>
+        <tr>
+          <td class="border-b border-r border-gray-300 font-bold text-gray-900">Stock Alert</td>
+          <td class="border-b border-gray-300 pl-2">{{ product.stock_alert }}</td>
+        </tr>
+        <tr>
+          <td class="border-b border-r border-gray-300 font-bold text-gray-900">Brand Name</td>
+          <td class="border-b border-gray-300 pl-2">{{ product.brand_name }}</td>
+        </tr>
+        {% if product.is_medicine %}
+        <tr>
+          <td class="border-b border-r border-gray-300 font-bold text-gray-900">Category</td>
+          <td class="border-b border-gray-300 pl-2">{{ product.category }}</td>
+        </tr>
+        <tr>
+          <td class="border-b border-r border-gray-300 font-bold text-gray-900">Generic Name</td>
+          <td class="border-b border-gray-300 pl-2">{{ product.generic_name }}</td>
+        </tr>
+        <tr>
+          <td class="border-b border-r border-gray-300 font-bold text-gray-900">Strength</td>
+          <td class="border-b border-gray-300 pl-2">{{ product.strength }}</td>
+        </tr>
+        <tr>
+          <td class="border-b border-r border-gray-300 font-bold text-gray-900">Dosage</td>
+          <td class="border-b border-gray-300 pl-2">{{ product.dosage }}</td>
+        </tr>
+        <tr>
+          <td class="border-b border-r border-gray-300 font-bold text-gray-900">Prescription Required</td>
+          <td class="border-b border-gray-300 pl-2">{{ 'Yes' if product.is_prescription_required else 'No' }}</td>
+        </tr>
+        <tr>
+          <td class="border-b border-r border-gray-300 font-bold text-gray-900">Side Effects</td>
+          <td class="border-b border-gray-300 pl-2">{{ product.side_effects }}</td>
+        </tr>
+        <tr>
+          <td class="border-b border-r border-gray-300 font-bold text-gray-900">Uses</td>
+          <td class="border-b border-gray-300 pl-2">{{ product.uses }}</td>
+        </tr>
+        {% endif %} {% if product.is_supplement %}
+        <tr>
+          <td class="border-b border-r border-gray-300 font-bold text-gray-900">Supplement Type</td>
+          <td class="border-b border-gray-300 pl-2">{{ product.supplement_type }}</td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <!--  -->
 
 {% endblock content%}

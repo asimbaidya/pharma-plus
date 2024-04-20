@@ -56,19 +56,13 @@ def inventory_update(product_id: int):
     return f"<h1>ID {product_id}</h1>"
 
 
-# this page will show all information about a product
-# customer: an add to cart
-# admin: can update inventory
-# delivery personnel: just view the product card
 @products.route("/product/<int:product_id>", methods=["GET"])
 def product(product_id: int):
     # verify if the product exists
-    return f"<h1>ID {product_id}</h1>"
+    product = Product.query.filter_by(id=product_id).first()
+    return render_template("product.html", product=product)
 
 
-# customer: an add to cart
-# admin: can update inventory
-# delivery personnel: just view the product card
 @products.route("/products/", methods=["GET"])
 def product_browser():
     products = Product.query.all()
