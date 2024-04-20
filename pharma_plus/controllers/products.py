@@ -2,6 +2,7 @@ from flask import Blueprint, flash, render_template, request
 
 from pharma_plus.models.product import Product
 from pharma_plus.utility.file_path_manager import save_image_to_static_folder
+from pharma_plus.utility.user_cart_manager import Cart
 from pharma_plus.utility.user_login_manager import admin_login_required
 
 products = Blueprint("products", __name__)
@@ -60,7 +61,7 @@ def inventory_update(product_id: int):
 def product(product_id: int):
     # verify if the product exists
     product = Product.query.filter_by(id=product_id).first()
-    return render_template("product.html", product=product)
+    return render_template("product.html", product=product, Cart=Cart)
 
 
 @products.route("/products/", methods=["GET"])

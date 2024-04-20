@@ -1,0 +1,41 @@
+<!-- prettier-ignore -->
+{% extends 'components/layout.html' %}
+{% block content %}
+
+<div class="container mx-auto py-8">
+  <h1 class="mb-4 text-2xl font-bold">Your Shopping Cart</h1>
+  <table class="w-full table-fixed">
+    <thead>
+      <tr>
+        <th class="w-1/4 border px-4 py-2">Product Name</th>
+        <th class="w-1/4 border px-4 py-2">Description</th>
+        <th class="w-1/4 border px-4 py-2">Price</th>
+        <th class="w-1/4 border px-4 py-2">Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr class="">
+        <td class="border px-4 py-2 hover:text-blue-500">
+          <a href="{{ url_for('products.product',product_id=product.id ) }}"> {{ product.name }} </a>
+        </td>
+        <td class="border px-4 py-2">{{ product.description }}</td>
+        <td class="border px-4 py-2">{{ product.price }}</td>
+        {% if product.out_of_stock %}
+        <td class="border bg-red-600 px-4 py-2">{{ product.quantity }} | available {{product.stock}}</td>
+        {% else %}
+        <td class="border px-4 py-2">{{ product.quantity }}</td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="mt-4">
+    <h3>Total Price: {{total_price}}</h3>
+  </div>
+
+  <!-- Checkout -->
+</div>
+
+{% endblock content%}

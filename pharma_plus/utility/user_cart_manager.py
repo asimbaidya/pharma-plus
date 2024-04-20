@@ -48,5 +48,20 @@ class Cart:
         return True
 
     @staticmethod
+    def is_product_in_cart(product_id: int):
+        product_id = str(product_id)
+        cart = session["cart"]
+        print("Here??")
+        print(product_id in cart)
+        print(cart)
+        print(product_id)
+        return product_id in cart
+
+    def get_product_quantity(product_id: int):
+        product_id = str(product_id)
+        cart = session["cart"]
+        return cart[product_id]
+
+    @staticmethod
     def clear_cart():
         session["cart"] = {}
