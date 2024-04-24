@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, render_template, request, url_for
+from flask import Blueprint, flash, redirect, render_template, request, url_for
 
 from pharma_plus.models.product import Inventory, Product
 from pharma_plus.utility.file_path_manager import save_image_to_static_folder
@@ -18,12 +18,12 @@ def add_new():
         image = request.files["image"]
         price = float(request.form.get("price"))
         stock = int(request.form.get("stock"))
+        expire_date = request.form.get("expire_date")
         category = request.form.get("category")
         generic_name = request.form.get("generic_name")
         dosage = request.form.get("dosage")
         side_effects = request.form.get("side_effects")
         is_medicine = bool(request.form.get("is_medicine"))
-        is_prescription_required = bool(request.form.get("is_prescription_required"))
         is_supplement = bool(request.form.get("is_supplement"))
 
         img_file_name = save_image_to_static_folder(
@@ -31,30 +31,35 @@ def add_new():
         )
 
         Product.add_to_inventory(
-            name=name,
             brand_name=brand_name,
-            description=description,
-            image_url=img_file_name,
-            price=price,
-            stock=stock,
             category=category,
-            generic_name=generic_name,
+            description=description,
             dosage=dosage,
-            side_effects=side_effects,
+            expire_date=expire_date,
+            generic_name=generic_name,
+            image_url=img_file_name,
             is_medicine=is_medicine,
-            is_prescription_required=is_prescription_required,
             is_supplement=is_supplement,
+            name=name,
+            price=price,
+            side_effects=side_effects,
+            stock=stock,
         )
         flash("Product added successfully", "success")
 
     return render_template("product-add.html")
 
 
-@products.route("/product/update/<int:product_id>", methods=["GET"])
+@products.route("/product/update/<int:product_id>", methods=["POST"])
 @admin_login_required
-def inventory_update(product_id: int):
-    # verify if the product exists
-    return f"<h1>ID {product_id}</h1>"
+def add_inventory(product_id: int):
+    expire_date = request.form.get("expire_date")
+    new_stock = request.form.get("new_stock")
+
+    Product.add_inventory(
+        product_id=product_id, expire_date=expire_date, new_stock=new_stock
+    )
+    return redirect(url_for("products.product", product_id=product_id))
 
 
 @products.route("/product/<int:product_id>", methods=["GET"])

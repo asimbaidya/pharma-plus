@@ -82,7 +82,7 @@ def place_order():
     phone_number = request.form["phone_number"]
 
     # as all payment method are cash on delivery, this is not requried at the moment
-    payment_method = request.form["payment_method"]
+    __payment_method = request.form["payment_method"]
 
     # getting the username from CurrnetUser and then fetching the customer object
     username = CurrentUser.get_username()

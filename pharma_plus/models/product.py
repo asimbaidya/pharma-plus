@@ -41,43 +41,52 @@ class Product(db.Model):
 
     @staticmethod
     def add_to_inventory(
-        stock,
-        name,
+        expire_date,
         brand_name,
-        description,
-        image_url,
-        price,
         category,
-        generic_name,
+        description,
         dosage,
-        side_effects,
+        generic_name,
+        image_url,
         is_medicine,
         is_supplement,
+        name,
+        price,
+        side_effects,
+        stock,
     ):
-        for _ in range(stock):
-            new_product = Product(
-                name=name,
-                brand_name=brand_name,
-                description=description,
-                image_url=image_url,
-                price=price,
-                category=category,
-                generic_name=generic_name,
-                dosage=dosage,
-                side_effects=side_effects,
-                is_medicine=is_medicine,
-                is_supplement=is_supplement,
-            )
-            db.session.add(new_product)
-            db.session.commit()
+        new_product = Product(
+            name=name,
+            brand_name=brand_name,
+            description=description,
+            image_url=image_url,
+            price=price,
+            category=category,
+            generic_name=generic_name,
+            dosage=dosage,
+            side_effects=side_effects,
+            is_medicine=is_medicine,
+            is_supplement=is_supplement,
+        )
+        db.session.add(new_product)
+        db.session.commit()
+
+        expire_date = datetime.strptime(expire_date, "%Y-%m-%d")
+        inventory = Inventory(
+            product_id=new_product.id, expire_date=expire_date, quantity=stock
+        )
+        db.session.add(inventory)
+        db.session.commit()
 
     @staticmethod
-    def update_inventory(product_id, new_stock):
-        product = Product.query.get(product_id)
-        if product:
-            product.stock += new_stock
-            db.session.commit()
-        raise Exception("Product not found")
+    def add_inventory(product_id, expire_date, new_stock):
+        expire_date = datetime.strptime(expire_date, "%Y-%m-%d")
+
+        inventory = Inventory(
+            product_id=product_id, expire_date=expire_date, quantity=new_stock
+        )
+        db.session.add(inventory)
+        db.session.commit()
 
 
 class Inventory(db.Model):

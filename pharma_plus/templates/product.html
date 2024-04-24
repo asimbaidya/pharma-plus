@@ -95,7 +95,39 @@
       {% endif %}
       <!-- prettier-ignore -->
       {% elif session.current_user['_is_admin'] %}
-      <a class="btn btn-outline btn-primary" href="#">Add New Stock</a>
+      <div x-data="{ open: false }" class="flex w-full flex-col justify-center">
+        <button @click="open = ! open" class="btn btn-primary block">Update Stock</button>
+
+        <div x-show="open">
+          <form action="{{ url_for('products.add_inventory',product_id=product.id ) }}" method="POST" class="mx-auto bg-sky-200 p-4">
+            <div class="mb-4">
+              <label class="mb-2 block text-sm font-bold text-gray-700" for="new_stock"> New Stock </label>
+              <input
+                class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+                id="new_stock"
+                name="new_stock"
+                type="number"
+                placeholder="New Stock"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label class="mb-2 block text-sm font-bold text-gray-700" for="expire_date"> Expire Date </label>
+              <input
+                class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+                id="expire_date"
+                name="expire_date"
+                type="date"
+                required
+                placeholder="Expire Date"
+              />
+            </div>
+            <div class="flex justify-center">
+              <button type="submit" class="btn btn-outline btn-primary">Update Now</button>
+            </div>
+          </form>
+        </div>
+      </div>
       <!-- prettier-ignore -->
       {% endif %}
       {% else %}
