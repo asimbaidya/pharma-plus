@@ -6,18 +6,11 @@
   </div>
   <div class="flex-none">
     <div class="dropdown dropdown-end">
-      <div tabindex="0" role="button" class="avatar btn btn-circle btn-ghost">
+      <div tabindex="0" role="button" class="avatar btn btn-circle btn-primary">
         <div class="w-10 rounded-full">
           <!-- prettier-ignore -->
           {% if session.current_user and session.current_user['_is_authenticated'] %}
-          <!-- <img alt="Login " src="#" /> -->
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-10 w-10">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-            />
-          </svg>
+          <img alt="{{session.current_user['username']}} " src="{{session.current_user['profile_image']}}" />
           {% else %}
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-10 w-10">
             <path
@@ -30,25 +23,41 @@
           {% endif %}
         </div>
       </div>
-      <ul tabindex="0" class="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box p-2 font-semibold shadow backdrop-blur-sm">
+      <ul tabindex="0" class="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box border border-blue-500 p-2 font-semibold shadow backdrop-blur-sm" style="width: 20vw">
         <!-- prettier-ignore -->
         {% if session.current_user and session.current_user['_is_authenticated'] %}
         {% if session.current_user['_is_admin'] %}
 
         <li>
-          <a href="{{ url_for('admin.profile',username=session.current_user['username'] ) }}" class="inline-block p-4 text-center hover:bg-primary">Profile: {{session.current_user['username']}}</a>
+          <a href="{{ url_for('admin.profile',username=session.current_user['username'] ) }}" class="inline-block p-4 text-center hover:bg-primary">
+            <img src="{{session.current_user['profile_image']}}" class="mr-2 inline-block h-6 w-6 rounded-full object-cover" alt="" />
+            Profile: {{session.current_user['username']}}
+          </a>
         </li>
+
         <li><a href="{{ url_for('products.add_new' ) }}" class="inline-block p-4 text-center hover:bg-primary">🆕 Add Inventory</a></li>
 
         {% elif session.current_user['_is_customer'] %}
 
-        <li><a href="#todo" class="inline-block p-4 text-center hover:bg-primary">Profile: {{session.current_user['username']}}</a></li>
+        <li>
+          <a href="#todo" class="inline-block p-4 text-center hover:bg-primary">
+            <img src="{{session.current_user['profile_image']}}" class="mr-2 inline-block h-6 w-6 rounded-full object-cover" alt="" />
+            {{session.current_user['username']}}
+          </a>
+        </li>
+
         <li><a href="#todo" class="inline-block p-4 text-center hover:bg-primary">Notification</a></li>
         <li><a href="{{ url_for('cart.show_cart' ) }}" class="inline-block p-4 text-center hover:bg-primary">Cart</a></li>
         <li><a href="#todo" class="inline-block p-4 text-center hover:bg-primary">History</a></li>
         {% elif session.current_user['_is_delivery_personnel'] %}
 
-        <li><a href="#todo" class="inline-block p-4 text-center hover:bg-primary">Profile: {{session.current_user['username']}}</a></li>
+        <li>
+          <a href="#todo" class="inline-block p-4 text-center hover:bg-primary">
+            <img src="{{session.current_user['profile_image']}}" class="mr-2 inline-block h-6 w-6 rounded-full object-cover" alt="" />
+            Profile: {{session.current_user['username']}}
+          </a>
+        </li>
+
         <li><a href="#todo" class="inline-block p-4 text-center hover:bg-primary">Notification</a></li>
         <li><a href="#todo" class="inline-block p-4 text-center hover:bg-primary">In Progress</a></li>
         <li><a href="#todo" class="inline-block p-4 text-center hover:bg-primary">History</a></li>

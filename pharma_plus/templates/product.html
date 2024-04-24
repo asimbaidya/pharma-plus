@@ -94,7 +94,12 @@
       <a class="btn btn-primary" href="{{ url_for('cart.add_to_cart',product_id=product.id ) }}">Add to Cart</a>
       {% endif %}
       <!-- prettier-ignore -->
+      {% elif session.current_user['_is_admin'] %}
+      <a class="btn btn-outline btn-primary" href="#">Add New Stock</a>
+      <!-- prettier-ignore -->
       {% endif %}
+      {% else %}
+      <a class="btn btn-ghost btn-outline" href="{{ url_for('users.login') }}">Add To Cart</a>
       {% endif %}
     </div>
   </div>

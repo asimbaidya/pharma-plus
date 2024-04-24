@@ -19,7 +19,6 @@ def add_dummy_users(db, User):
         weight=70.5,
         height=175.0,
         marital_status="Single",
-        profile_image="customer.jpg",
     )
     db.session.add(user1)
 
@@ -38,14 +37,13 @@ def add_dummy_users(db, User):
         weight=60.2,
         height=160.0,
         marital_status="Married",
-        profile_image="admin.jpg",
     )
     # dummy user 3
     user3 = User(
-        type="delivery_personel",
+        type="delivery_personnel",
         first_name="David",
         last_name="Johnson",
-        username="delivery_personnel_1",
+        username="dp1",
         email="david.johnson@example.com",
         password=generate_password_hash("secret"),
         phone="5555555555",
@@ -55,7 +53,6 @@ def add_dummy_users(db, User):
         weight=80.0,
         height=185.0,
         marital_status="Single",
-        profile_image="delivery_personel.jpg",
     )
     db.session.add(user1)
     db.session.add(user2)

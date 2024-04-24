@@ -1,3 +1,4 @@
+from flask import url_for
 from werkzeug.security import check_password_hash
 
 from pharma_plus import db
@@ -63,14 +64,30 @@ class User(db.Model):
 
     @staticmethod
     def verify_login(username, password, user_type):
+        print(username)
+        print(user_type)
+        print(password)
         user: User = User.query.filter_by(username=username).first()
+        print(user.type == user_type)
+        print(user.type, user_type)
         if (
             user
             and check_password_hash(user.password, password)
             and user.type == user_type
         ):
-            # todo: add to session
-            profile_image = "#todo"
+
+            if user_type == "admin":
+                profile_image = url_for(
+                    "static", filename=f"media/admins/{user.profile_image}"
+                )
+            elif user_type == "customer":
+                profile_image = url_for(
+                    "static", filename=f"media/customers/{user.profile_image}"
+                )
+            else:
+                profile_image = url_for(
+                    "static", filename=f"media/delivery_personnels/{user.profile_image}"
+                )
             CurrentUser.login(
                 id=user.id,
                 username=user.username,

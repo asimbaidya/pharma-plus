@@ -3,7 +3,7 @@
 {% block content %}
 <div class="mx-auto max-w-lg overflow-hidden rounded-lg bg-white shadow-lg">
   <div class="px-6 py-4">
-    <h2 class="mb-2 text-2xl font-bold">Add New Product</h2>
+    <h2 class="mb-2 rounded-sm bg-blue-700 text-center text-2xl font-bold text-white">Add New Product</h2>
     <form action="{{ url_for('products.add_new' ) }}" enctype="multipart/form-data" method="post">
       <!-- Product Name -->
       <div class="mb-4">
@@ -35,6 +35,11 @@
         <label for="stock" class="mb-2 block font-bold text-gray-700">Stock</label>
         <input type="number" name="stock" id="stock" class="w-full rounded-lg border px-3 py-2 focus:border-blue-500 focus:outline-none" required />
       </div>
+      <!-- Expiry Date -->
+      <div class="mb-4">
+        <label for="expire_date" class="mb-2 block font-bold text-gray-700">Expiry Date</label>
+        <input type="date" name="expire_date" id="expire_date" class="w-full rounded-lg border px-3 py-2 focus:border-blue-500 focus:outline-none" required />
+      </div>
       <!-- Category -->
       <div class="mb-4">
         <label for="category" class="mb-2 block font-bold text-gray-700">Category</label>
@@ -60,18 +65,13 @@
         <label for="is_medicine" class="mb-2 block font-bold text-gray-700">Is Medicine</label>
         <input type="checkbox" name="is_medicine" id="is_medicine" class="mr-2 leading-tight" />
       </div>
-      <!-- Is Prescription Required -->
-      <div class="mb-4">
-        <label for="is_prescription_required" class="mb-2 block font-bold text-gray-700">Is Prescription Required?</label>
-        <input type="checkbox" name="is_prescription_required" id="is_prescription_required" class="mr-2 leading-tight" />
-      </div>
       <!-- Is Supplement -->
       <div class="mb-4">
         <label for="is_supplement" class="mb-2 block font-bold text-gray-700">Is Supplement ?</label>
         <input type="checkbox" name="is_supplement" id="is_supplement" class="mr-2 leading-tight" />
       </div>
       <!-- Submit Button -->
-      <div class="flex justify-end">
+      <div class="flex justify-center">
         <button type="submit" class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-600 focus:outline-none">Add Product</button>
       </div>
     </form>
