@@ -83,4 +83,4 @@ def product_browser():
             "static", filename=f"media/products/{product.image_url}"
         )
 
-    return render_template("product-browser.html", products=products)
+    return render_template("product-browser.html", products=products, Cart=Cart)

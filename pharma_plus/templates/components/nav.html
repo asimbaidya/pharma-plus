@@ -46,9 +46,15 @@
           </a>
         </li>
 
-        <li><a href="#todo" class="inline-block p-4 text-center hover:bg-primary">Notification</a></li>
-        <li><a href="{{ url_for('cart.show_cart' ) }}" class="inline-block p-4 text-center hover:bg-primary">Cart</a></li>
-        <li><a href="#todo" class="inline-block p-4 text-center hover:bg-primary">History</a></li>
+        <li>
+          <a href="#todo" class="inline-block p-4 text-center hover:bg-primary"> <em>🔔</em> Notification</a>
+        </li>
+        <li>
+          <a href="{{ url_for('cart.show_cart' ) }}" class="inline-block p-4 text-center hover:bg-primary"> <em>🛒</em> Cart </a>
+        </li>
+        <li>
+          <a href="#todo" class="inline-block p-4 text-center hover:bg-primary"><em>📜</em>History</a>
+        </li>
         {% elif session.current_user['_is_delivery_personnel'] %}
 
         <li>
@@ -58,19 +64,27 @@
           </a>
         </li>
 
-        <li><a href="#todo" class="inline-block p-4 text-center hover:bg-primary">Notification</a></li>
-        <li><a href="#todo" class="inline-block p-4 text-center hover:bg-primary">In Progress</a></li>
-        <li><a href="#todo" class="inline-block p-4 text-center hover:bg-primary">History</a></li>
+        <li>
+          <a href="#todo" class="inline-block p-4 text-center hover:bg-primary"> <em>🔔</em> Notification</a>
+        </li>
+        <li>
+          <a href="#todo" class="inline-block p-4 text-center hover:bg-primary"><em>🎯</em>In Progress</a>
+        </li>
+        <li>
+          <a href="#todo" class="inline-block p-4 text-center hover:bg-primary"><em>📜</em>History</a>
+        </li>
 
         {% endif %}
 
-        <li><a href="{{ url_for('users.logout') }}" class="inline-block p-4 text-center hover:bg-primary">📤 Logout</a></li>
+        <li>
+          <a href="{{ url_for('users.logout') }}" class="inline-block p-4 text-center hover:bg-primary"><em>📤</em>Logout</a>
+        </li>
         {% else %}
         <li>
-          <a href="{{url_for('users.login')}}" class="inline-block p-4 text-center hover:bg-primary">Login</a>
+          <a href="{{url_for('users.login')}}" class="inline-block p-4 text-center hover:bg-primary"><em>🈴</em>Login</a>
         </li>
         <li>
-          <a href="{{url_for('users.register')}}" class="inline-block p-4 text-center hover:bg-primary">Register</a>
+          <a href="{{url_for('users.register')}}" class="inline-block p-4 text-center hover:bg-primary"><em>㊗️</em>Register</a>
         </li>
         {% endif %}
       </ul>

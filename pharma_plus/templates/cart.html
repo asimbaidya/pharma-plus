@@ -43,30 +43,59 @@
     <h3 class="bg-red-500 p-4 font-bold">Some products are out of stock; Remove them to place an Order</h3>
   </div>
   {% else %}
-  <div x-data="{ open: false }">
-    <button @click="open = ! open" class="btn btn-primary">Place Order Now</button>
+  <div class="flex flex-col justify-center">
+    <div x-data="{ open: false }" class="m-2">
+      <button @click="open = ! open" class="btn btn-primary">Place Order Now</button>
 
-    <div x-show="open">
-      <form action="/place_order" method="POST" class="mx-auto max-w-md bg-slate-400 p-4">
-        <div class="mb-4">
-          <label for="delivery_address" class="block text-gray-700">Address</label>
-          <textarea id="delivery_address" name="delivery_address" placeholder="Delivery address" required class="textarea textarea-primary w-full" placeholder="Address" aria-required=""></textarea>
-        </div>
-        <div class="mb-4">
-          <label for="phone_number" class="block text-gray-700">Phone Number</label>
-          <input id="phone_number" type="tel" name="phone_number" placeholder="Phone Number " class="input input-bordered input-primary w-full" required />
-        </div>
-        <div class="mb-4">
-          <label for="payment_method" class="block text-gray-700">Payment</label>
-          <select id="payment_method" name="payment_method" class="select select-bordered w-full" required>
-            <option disabled selected>Select Payment Method</option>
-            <option>Cash On Delivery</option>
-          </select>
-        </div>
-        <button type="submit" class="inline-block bg-indigo-600 p-4 font-semibold uppercase tracking-wider text-white hover:bg-indigo-700 focus:outline-none active:bg-indigo-700">
-          Confirm Order
-        </button>
-      </form>
+      <div x-show="open" class="m-2">
+        <form action="/place_order" method="POST" class="mx-auto w-full bg-slate-200 p-4">
+          <div class="mb-4">
+            <label for="delivery_address" class="block text-gray-700">Address</label>
+            <textarea id="delivery_address" name="delivery_address" placeholder="Delivery address" required class="textarea textarea-primary w-full" placeholder="Address" aria-required=""></textarea>
+          </div>
+          <div class="mb-4">
+            <label for="phone_number" class="block text-gray-700">Phone Number</label>
+            <input id="phone_number" type="tel" name="phone_number" placeholder="Phone Number " class="input input-bordered input-primary w-full" required />
+          </div>
+          <div class="mb-4">
+            <label for="payment_method" class="block text-gray-700">Payment</label>
+            <select id="payment_method" name="payment_method" class="select select-bordered w-full" required>
+              <option disabled selected>Select Payment Method</option>
+              <option>Cash On Delivery</option>
+            </select>
+          </div>
+          <button type="submit" class="inline-block bg-indigo-600 p-4 font-semibold uppercase tracking-wider text-white hover:bg-indigo-700 focus:outline-none active:bg-indigo-700">
+            Confirm Order
+          </button>
+        </form>
+      </div>
+    </div>
+    <!--  -->
+    <div x-data="{ open: false }" class="m-2">
+      <button @click="open = ! open" class="btn bg-orange-500">Place an Periodic Subscription!</button>
+
+      <div x-show="open" class="m-2">
+        <form action="/place_order" method="POST" class="mx-auto w-full bg-slate-100 p-4">
+          <div class="mb-4">
+            <label for="delivery_address" class="block text-gray-700">Address</label>
+            <textarea id="delivery_address" name="delivery_address" placeholder="Delivery address" required class="textarea textarea-primary w-full" placeholder="Address" aria-required=""></textarea>
+          </div>
+          <div class="mb-4">
+            <label for="phone_number" class="block text-gray-700">Phone Number</label>
+            <input id="phone_number" type="tel" name="phone_number" placeholder="Phone Number " class="input input-bordered input-primary w-full" required />
+          </div>
+          <div class="mb-4">
+            <label for="payment_method" class="block text-gray-700">Payment</label>
+            <select id="payment_method" name="payment_method" class="select select-bordered w-full" required>
+              <option disabled selected>Select Payment Method</option>
+              <option>Cash On Delivery</option>
+            </select>
+          </div>
+          <button type="submit" class="hver:bg-orange-700 inline-block bg-orange-600 p-4 font-semibold uppercase tracking-wider text-white focus:outline-none active:bg-orange-700">
+            Confirm Order
+          </button>
+        </form>
+      </div>
     </div>
   </div>
   {% endif %}

@@ -124,9 +124,8 @@ subscription_product = db.Table(
 class Subscription(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-
-    start_date = db.Column(db.DateTime, nullable=False)
-    frequency = db.Column(db.String(20), nullable=False)
+    count = db.Column(db.DateTime, nullable=False)
+    total_course = db.Column(db.Integer, nullable=False)
     active = db.Column(db.Boolean, default=True)
 
     products = db.relationship(
