@@ -33,12 +33,46 @@
     </tbody>
   </table>
 
-  <div class="mt-4">
-    <h3>Total Price: {{total_price}}</h3>
+  <div class="my-4">
+    <h3 class="font-bold">Total Price: {{total_price}}</h3>
   </div>
+
+  <!-- prettier-ignore -->
+  {% if out_of_stock_exist %}
+  <div class="mt-4">
+    <h3 class="bg-red-500 p-4 font-bold">Some products are out of stock; Remove them to place an Order</h3>
+  </div>
+  {% else %}
+  <div x-data="{ open: false }">
+    <button @click="open = ! open" class="btn btn-primary">Place Order Now</button>
+
+    <div x-show="open">
+      <form action="/place_order" method="POST" class="mx-auto max-w-md bg-slate-400 p-4">
+        <div class="mb-4">
+          <label for="delivery_address" class="block text-gray-700">Address</label>
+          <textarea id="delivery_address" name="delivery_address" placeholder="Delivery address" required class="textarea textarea-primary w-full" placeholder="Address" aria-required=""></textarea>
+        </div>
+        <div class="mb-4">
+          <label for="phone_number" class="block text-gray-700">Phone Number</label>
+          <input id="phone_number" type="tel" name="phone_number" placeholder="Phone Number " class="input input-bordered input-primary w-full" required />
+        </div>
+        <div class="mb-4">
+          <label for="payment_method" class="block text-gray-700">Payment</label>
+          <select id="payment_method" name="payment_method" class="select select-bordered w-full" required>
+            <option disabled selected>Select Payment Method</option>
+            <option>Cash On Delivery</option>
+          </select>
+        </div>
+        <button type="submit" class="inline-block bg-indigo-600 p-4 font-semibold uppercase tracking-wider text-white hover:bg-indigo-700 focus:outline-none active:bg-indigo-700">
+          Confirm Order
+        </button>
+      </form>
+    </div>
+  </div>
+  {% endif %}
 </div>
 {% else %}
-<h2 class="font-bold text-red-500">Cart is Empty</h2>
+<h2 class="bg-red-500 p-4 text-center font-bold">Cart is Empty</h2>
 {% endif %}
 
 <!-- prettier-ignore -->

@@ -24,6 +24,10 @@ class Product(db.Model):
     monthly_sell_frequency = db.Column(db.Integer, nullable=True)
     stock_alert = db.Column(db.Integer, nullable=True)
 
+    # expire date
+    expire_date = db.Column(db.DateTime, nullable=True)
+    order_quantity = db.Column(db.Integer, nullable=True)
+
     # brand info
     brand_name = db.Column(db.String(120), nullable=True)
 
@@ -50,12 +54,12 @@ class Product(db.Model):
 
     @staticmethod
     def add_to_inventory(
+        stock,
         name,
         brand_name,
         description,
         image_url,
         price,
-        stock,
         category,
         generic_name,
         dosage,
@@ -64,23 +68,23 @@ class Product(db.Model):
         is_prescription_required,
         is_supplement,
     ):
-        new_product = Product(
-            name=name,
-            brand_name=brand_name,
-            description=description,
-            image_url=image_url,
-            price=price,
-            stock=stock,
-            category=category,
-            generic_name=generic_name,
-            dosage=dosage,
-            side_effects=side_effects,
-            is_medicine=is_medicine,
-            is_prescription_required=is_prescription_required,
-            is_supplement=is_supplement,
-        )
-        db.session.add(new_product)
-        db.session.commit()
+        for _ in range(stock):
+            new_product = Product(
+                name=name,
+                brand_name=brand_name,
+                description=description,
+                image_url=image_url,
+                price=price,
+                category=category,
+                generic_name=generic_name,
+                dosage=dosage,
+                side_effects=side_effects,
+                is_medicine=is_medicine,
+                is_prescription_required=is_prescription_required,
+                is_supplement=is_supplement,
+            )
+            db.session.add(new_product)
+            db.session.commit()
 
     @staticmethod
     def update_inventory(product_id, new_stock):
@@ -100,16 +104,23 @@ class Order(db.Model):
     order_received_timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     order_complated_timestamp = db.Column(db.DateTime, nullable=True)
     delivery_address = db.Column(db.String(255), nullable=False)
+    phone_number = db.Column(db.String(20), nullable=False)
 
     # ? information of delivery personel
     # ? information of admin(who approved)
     # ? of user(who ordered!)
+    customer_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    delivery_personel_id = db.Column(
+        db.Integer, db.ForeignKey("user.id"), nullable=True
+    )
+    admin_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True)
 
+    total_items = db.Column(db.Integer, nullable=False)
     ## different order for Subscription ??
 
     # payment
     status = db.Column(db.String(20), nullable=False)
-    total_bil = db.Column(db.Integer, nullable=False)
+    total_bill = db.Column(db.Integer, nullable=False)
     payment_method = db.Column(db.String(50), nullable=False)
 
     # product

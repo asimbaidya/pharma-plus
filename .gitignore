@@ -15,3 +15,6 @@ node_modules
 
 
 pharma_plus/static/media/
+
+# mediocrity test
+mediocrity-check
