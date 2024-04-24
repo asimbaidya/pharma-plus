@@ -1,10 +1,11 @@
+import random
 from datetime import datetime
 
 from flask import Blueprint, flash, redirect, render_template, request, session, url_for
-from werkzeug.security import generate_password_hash
+from sqlalchemy import asc
 
 from pharma_plus import db
-from pharma_plus.models.product import Inventory, Order, Product
+from pharma_plus.models.product import Inventory, Order, OrderProduct, Product
 from pharma_plus.models.user import User
 from pharma_plus.utility.user_cart_manager import Cart
 from pharma_plus.utility.user_login_manager import customer_login_required
@@ -79,10 +80,12 @@ def place_order():
 
     delivery_address = request.form["delivery_address"]
     phone_number = request.form["phone_number"]
+
+    # as all payment method are cash on delivery, this is not requried at the moment
     payment_method = request.form["payment_method"]
 
+    # getting the username from CurrnetUser and then fetching the customer object
     username = CurrentUser.get_username()
-    print(username)
     customer = db.session.query(User).filter_by(username=username).first()
 
     cart = session["cart"]
@@ -98,7 +101,22 @@ def place_order():
     total_bill = sum(product.price for product in products)
 
     for product in products:
-        product.stock -= int(cart[str(product.id)])
+        total_quantity_required = int(cart[str(product.id)])
+
+        # Fetch all inventories that have quantity more than 0 and sort them based on expire_date
+        inventories = (
+            Inventory.query.filter_by(product_id=product.id)
+            .filter(Inventory.quantity > 0)
+            .order_by(asc(Inventory.expire_date))
+            .all()
+        )
+
+        for inventory in inventories:
+            if total_quantity_required > 0:
+                # Decrease total_quantity_required from inventory
+                decrease_quantity = min(total_quantity_required, inventory.quantity)
+                inventory.quantity -= decrease_quantity
+                total_quantity_required -= decrease_quantity
 
     # Create a new order object
     order = Order(
@@ -109,15 +127,32 @@ def place_order():
         total_items=total_items,
         status="Pending",
         total_bill=total_bill,
-        payment_method=payment_method,
-        products=products,
+        verification_code=random.randint(1000000000, 9999999999),
+        # products=products,
     )
 
-    # Add the order to the database session
-
+    # add the order to the database session
     db.session.add(order)
     db.session.commit()
 
+    # now add quantity information to database
+    for product in products:
+        order_product = OrderProduct(
+            order_id=order.id,
+            product_id=product.id,
+            quantity=cart[str(product.id)],
+        )
+        db.session.add(order_product)
+        db.session.commit()
+
+    # now find delivery personnels who are not busy and then assign
+    delivery_personnels = (
+        User.query.filter_by(type="delivery_personnel")
+        .order_by(asc(User.total_deliveries_in_progress))
+        .first()
+    )
+
+    order.delivery_personel_id = delivery_personnels.id
     session["cart"] = {}
 
     flash("Order Placed", "success")

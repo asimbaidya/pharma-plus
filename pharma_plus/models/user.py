@@ -40,6 +40,9 @@ class User(db.Model):
     height = db.Column(db.Float, nullable=True)
     marital_status = db.Column(db.String(20), nullable=True)
 
+    # delivery_personnel specific data
+    total_deliveries_in_progress = db.Column(db.Integer, nullable=True, default=0)
+
     @staticmethod
     def is_unique_email(new_email: str):
         return User.query.filter_by(email=new_email).first() is None
