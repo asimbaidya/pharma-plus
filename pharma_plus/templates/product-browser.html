@@ -7,8 +7,8 @@
   <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
     {% for product in products %}
     <a href="{{ url_for('products.product',product_id=product.id ) }}">
-      <div class="rounded-lg bg-white shadow-md">
-        <img src="{{ product.image_url }}" alt="{{ product.name }}" class="h-48 w-full rounded-t-lg object-cover" />
+      <div class="overflow-hidden rounded-lg bg-white shadow-md">
+        <img src="{{ product.image_url }}" alt="{{ product.name }}" class="h-48 w-full transform rounded-t-lg object-contain transition-transform duration-300 hover:scale-110" />
         <div class="p-4">
           <h2 class="text-lg font-semibold">{{ product.name }}</h2>
           <p class="text-gray-600">{{ product.brand_name }}</p>
@@ -16,6 +16,7 @@
         </div>
       </div>
     </a>
+
     {% endfor %}
   </div>
 </div>

@@ -40,22 +40,28 @@ def create_app(config_class=Config):
     app.register_blueprint(cart)
 
     from pharma_plus.models.other import (
-        Analytics,
-        Delivery,
         Feedback,
         Notification,
-        ProductSuggestion,
     )
-    from pharma_plus.models.product import Order, Payment, Prescription, Product
+    from pharma_plus.models.product import (
+        Inventory,
+        Order,
+        OrderProduct,
+        Payment,
+        Product,
+    )
     from pharma_plus.models.user import RewardPoints, Subscription, User
 
     print("These Flowing are the models of This Application")
     # Print table names for models in other
-    for model in [Analytics, Delivery, Feedback, Notification, ProductSuggestion]:
+    for model in [
+        Feedback,
+        Notification,
+    ]:
         print(f"Table Name: {model.__name__}")
 
     # Print table names for models in product
-    for model in [Order, Payment, Prescription, Product]:
+    for model in [Order, Payment, Product, Inventory, OrderProduct]:
         print(f"Table Name: {model.__name__}")
 
     # Print table names for models in user

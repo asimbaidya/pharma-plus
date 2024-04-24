@@ -1,6 +1,6 @@
-from flask import Blueprint, flash, render_template, request
+from flask import Blueprint, flash, render_template, request, url_for
 
-from pharma_plus.models.product import Product
+from pharma_plus.models.product import Inventory, Product
 from pharma_plus.utility.file_path_manager import save_image_to_static_folder
 from pharma_plus.utility.user_cart_manager import Cart
 from pharma_plus.utility.user_login_manager import admin_login_required
@@ -61,10 +61,21 @@ def inventory_update(product_id: int):
 def product(product_id: int):
     # verify if the product exists
     product = Product.query.filter_by(id=product_id).first()
+    product.image_url = url_for(
+        "static", filename=f"media/products/{product.image_url}"
+    )
+    inventories = Inventory.query.filter_by(product_id=product.id).all()
+    product.stock = sum([inventory.quantity for inventory in inventories])
+
     return render_template("product.html", product=product, Cart=Cart)
 
 
 @products.route("/products/", methods=["GET"])
 def product_browser():
     products = Product.query.all()
+    for product in products:
+        product.image_url = url_for(
+            "static", filename=f"media/products/{product.image_url}"
+        )
+
     return render_template("product-browser.html", products=products)

@@ -4,7 +4,7 @@ from flask import Blueprint, flash, redirect, render_template, request, session,
 from werkzeug.security import generate_password_hash
 
 from pharma_plus import db
-from pharma_plus.models.product import Order, Product
+from pharma_plus.models.product import Inventory, Order, Product
 from pharma_plus.models.user import User
 from pharma_plus.utility.user_cart_manager import Cart
 from pharma_plus.utility.user_login_manager import customer_login_required
@@ -54,6 +54,9 @@ def show_cart():
 
     out_of_stock_exist = False
     for product in products:
+        inventories = Inventory.query.filter_by(product_id=product.id).all()
+        product.stock = sum([inventory.quantity for inventory in inventories])
+
         if int(product.quantity) > product.stock:
             product.out_of_stock = True
             out_of_stock_exist = True

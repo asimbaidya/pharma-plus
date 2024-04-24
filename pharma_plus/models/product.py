@@ -1,13 +1,6 @@
-from ast import Try
 from datetime import datetime
 
 from pharma_plus import db
-
-order_product = db.Table(
-    "order_product",
-    db.Column("order_id", db.Integer, db.ForeignKey("order.id")),
-    db.Column("product_id", db.Integer, db.ForeignKey("product.id")),
-)
 
 
 class Product(db.Model):
@@ -20,13 +13,7 @@ class Product(db.Model):
     price = db.Column(db.Float, nullable=False)
 
     # related to sells
-    stock = db.Column(db.Integer, nullable=False)
-    monthly_sell_frequency = db.Column(db.Integer, nullable=True)
-    stock_alert = db.Column(db.Integer, nullable=True)
-
-    # expire date
-    expire_date = db.Column(db.DateTime, nullable=True)
-    order_quantity = db.Column(db.Integer, nullable=True)
+    stock = db.Column(db.Integer, nullable=True)
 
     # brand info
     brand_name = db.Column(db.String(120), nullable=True)
@@ -35,7 +22,6 @@ class Product(db.Model):
     category = db.Column(db.String(120), nullable=True)
     generic_name = db.Column(db.String(120), nullable=True)
     is_medicine = db.Column(db.Boolean, default=False)
-    is_prescription_required = db.Column(db.Boolean, default=False)
     strength = db.Column(db.String(120), nullable=True)
 
     # additional fields (optional)
@@ -46,6 +32,7 @@ class Product(db.Model):
     # Supplement specific attributes (optional)
     is_supplement = db.Column(db.Boolean, default=False)
     supplement_type = db.Column(db.String(120), nullable=True)
+    inventory = db.relationship("Inventory", backref="product", lazy=True)
 
     @staticmethod
     def save_product_image(image):
@@ -65,7 +52,6 @@ class Product(db.Model):
         dosage,
         side_effects,
         is_medicine,
-        is_prescription_required,
         is_supplement,
     ):
         for _ in range(stock):
@@ -80,7 +66,6 @@ class Product(db.Model):
                 dosage=dosage,
                 side_effects=side_effects,
                 is_medicine=is_medicine,
-                is_prescription_required=is_prescription_required,
                 is_supplement=is_supplement,
             )
             db.session.add(new_product)
@@ -95,6 +80,13 @@ class Product(db.Model):
         raise Exception("Product not found")
 
 
+class Inventory(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    product_id = db.Column(db.Integer, db.ForeignKey("product.id"), nullable=False)
+    expire_date = db.Column(db.Date, nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+
+
 class Order(db.Model):
     # basic info
     id = db.Column(db.Integer, primary_key=True)
@@ -106,36 +98,32 @@ class Order(db.Model):
     delivery_address = db.Column(db.String(255), nullable=False)
     phone_number = db.Column(db.String(20), nullable=False)
 
-    # ? information of delivery personel
-    # ? information of admin(who approved)
-    # ? of user(who ordered!)
     customer_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     delivery_personel_id = db.Column(
         db.Integer, db.ForeignKey("user.id"), nullable=True
     )
-    admin_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True)
-
-    total_items = db.Column(db.Integer, nullable=False)
-    ## different order for Subscription ??
 
     # payment
     status = db.Column(db.String(20), nullable=False)
+    total_items = db.Column(db.Integer, nullable=False)
     total_bill = db.Column(db.Integer, nullable=False)
-    payment_method = db.Column(db.String(50), nullable=False)
+    payment_id = db.Column(db.Integer, db.ForeignKey("payment.id"))
+    verification_code = db.Column(db.String(10), nullable=False)
 
-    # product
-    products = db.relationship("Product", secondary="order_product")
+    # new method
+    products = db.relationship("OrderProduct", backref="order", lazy=True)
 
 
-class Prescription(db.Model):
+class OrderProduct(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-    image_url = db.Column(db.String(255), nullable=False)
-    confirmed = db.Column(db.Boolean, default=False)
+    order_id = db.Column(db.Integer, db.ForeignKey("order.id"), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey("product.id"), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
 
 
 class Payment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     amount = db.Column(db.Float, nullable=False)
-    discount = db.Column(db.Float, nullable=True)
+    payment_method = db.Column(db.String(50), nullable=False, default="cash")
+    payment_timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     order_id = db.Column(db.Integer, db.ForeignKey("order.id"), nullable=False)

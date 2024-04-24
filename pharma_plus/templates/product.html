@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="mx-auto max-w-xl overflow-hidden rounded-lg bg-white shadow-lg">
-  <img class="h-64 w-full object-cover object-center" src="{{ product.image_url }}" alt="{{ product.name }}" />
+  <img class="h-64 w-full object-contain pt-4" src="{{ product.image_url }}" alt="{{ product.name }}" />
   <div class="p-4">
     <table class="w-full table-auto border border-gray-300">
       <tbody>
@@ -22,14 +22,6 @@
         <tr>
           <td class="border-b border-r border-gray-300 font-bold text-gray-900">Stock</td>
           <td class="border-b border-gray-300 pl-2">{{ product.stock }}</td>
-        </tr>
-        <tr>
-          <td class="border-b border-r border-gray-300 font-bold text-gray-900">Monthly Sells</td>
-          <td class="border-b border-gray-300 pl-2">{{ product.monthly_sell_frequency }}</td>
-        </tr>
-        <tr>
-          <td class="border-b border-r border-gray-300 font-bold text-gray-900">Stock Alert</td>
-          <td class="border-b border-gray-300 pl-2">{{ product.stock_alert }}</td>
         </tr>
         <tr>
           <td class="border-b border-r border-gray-300 font-bold text-gray-900">Brand Name</td>
@@ -77,10 +69,26 @@
       {% if session.current_user and session.current_user['_is_authenticated'] %}
       {% if session.current_user['_is_customer'] %}
       {% if Cart.is_product_in_cart(product.id) %}
+      <div class="flex items-center justify-between">
+        <div class="grid flex-1 grid-cols-3 gap-4">
+          <a class="btn btn-primary flex items-center justify-center rounded bg-blue-500 py-2 text-white" href="{{ url_for('cart.decrease',product_id=product.id ) }}">
+            <span class="text-xl">-</span>
+          </a>
+          <button class="btn btn-secondary flex items-center justify-center rounded bg-blue-600 py-2 text-black">In Cart: {{Cart.get_product_quantity(product.id)}}</button>
+          <a class="btn btn-primary flex items-center justify-center rounded bg-blue-500 py-2 text-white" href="{{ url_for('cart.increase',product_id=product.id ) }}">
+            <span class="text-xl">+</span>
+          </a>
+        </div>
+        <a class="btn btn-info ml-4 rounded bg-blue-600 px-4 py-2 text-white" href="{{ url_for('cart.show_cart' ) }}">Check Out</a>
+      </div>
+
+      <!-- up updated -->
+      <!--
       <a class="btn btn-primary" href="{{ url_for('cart.decrease',product_id=product.id ) }}">Decrease</a>
       <button class="btn btn-secondary">In Cart: {{Cart.get_product_quantity(product.id)}}</button>
       <a class="btn btn-primary" href="{{ url_for('cart.increase',product_id=product.id ) }}">Increase</a>
       <a class="btn btn-info" href="{{ url_for('cart.show_cart' ) }}">Check Out</a>
+      -->
       {% else %}
 
       <a class="btn btn-primary" href="{{ url_for('cart.add_to_cart',product_id=product.id ) }}">Add to Cart</a>

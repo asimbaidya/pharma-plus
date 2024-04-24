@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, url_for
 
 from pharma_plus.models.product import Product
 
@@ -42,4 +42,8 @@ def search_results():
     if sort == "Descending":
         products = sorted(products, key=lambda x: x.name, reverse=True)
 
+    for product in products:
+        product.image_url = url_for(
+            "static", filename=f"media/products/{product.image_url}"
+        )
     return render_template("search_results.html", products=products)

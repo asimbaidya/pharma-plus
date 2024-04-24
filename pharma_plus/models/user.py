@@ -106,11 +106,8 @@ class Subscription(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 
     start_date = db.Column(db.DateTime, nullable=False)
+    frequency = db.Column(db.String(20), nullable=False)
     active = db.Column(db.Boolean, default=True)
-
-    # frequency?
-    # payment ?
-    # confirm ?
 
     products = db.relationship(
         "Product", secondary=subscription_product, backref="subscribers"

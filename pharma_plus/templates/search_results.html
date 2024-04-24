@@ -5,7 +5,7 @@
   {% for product in products %}
   <a href="{{ url_for('products.product',product_id=product.id ) }}">
     <div class="rounded-lg bg-white shadow-md">
-      <img src="{{ product.image_url }}" alt="{{ product.name }}" class="h-48 w-full rounded-t-lg object-cover" />
+      <img src="{{ product.image_url }}" alt="{{ product.name }}" class="h-48 w-full rounded-t-lg object-contain" />
       <div class="p-4">
         <h2 class="text-lg font-semibold">
           <!-- prettier-ignore -->

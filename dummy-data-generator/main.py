@@ -12,27 +12,28 @@ from dummy_users import add_dummy_users
 if __name__ == "__main__":
     from pharma_plus import db
     from pharma_plus.models.other import (
-        Analytics,
-        Delivery,
         Feedback,
         Notification,
-        ProductSuggestion,
     )
-    from pharma_plus.models.product import Order, Payment, Prescription, Product
+    from pharma_plus.models.product import (
+        Inventory,
+        Order,
+        OrderProduct,
+        Payment,
+        Product,
+    )
     from pharma_plus.models.user import RewardPoints, Subscription, User
     from run import app
 
     app.app_context().push()
     db.create_all()
 
-    print(f"{Analytics.__name__} table was created successfully!")
-    print(f"{Delivery.__name__} table was created successfully!")
     print(f"{Feedback.__name__} table was created successfully!")
+    print(f"{Inventory.__name__} table was created successfully!")
     print(f"{Notification.__name__} table was created successfully!")
-    print(f"{ProductSuggestion.__name__} table was created successfully!")
     print(f"{Order.__name__} table was created successfully!")
+    print(f"{OrderProduct.__name__} table was created successfully!")
     print(f"{Payment.__name__} table was created successfully!")
-    print(f"{Prescription.__name__} table was created successfully!")
     print(f"{Product.__name__} table was created successfully!")
     print(f"{RewardPoints.__name__} table was created successfully!")
     print(f"{Subscription.__name__} table was created successfully!")
@@ -41,7 +42,7 @@ if __name__ == "__main__":
     print("Creating dummy data...")
 
     add_dummy_users(db=db, User=User)
-    add_dummy_products(db=db, Product=Product)
+    add_dummy_products(db=db, Product=Product, Inventory=Inventory)
 
     # Commit the changes to the database
     db.session.commit()
