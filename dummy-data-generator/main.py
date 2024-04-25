@@ -11,10 +11,7 @@ from dummy_users import add_dummy_users
 
 if __name__ == "__main__":
     from pharma_plus import db
-    from pharma_plus.models.other import (
-        Feedback,
-        Notification,
-    )
+    from pharma_plus.models.other import Feedback, Notification, Post
     from pharma_plus.models.product import (
         Inventory,
         Order,
@@ -34,6 +31,7 @@ if __name__ == "__main__":
     print(f"{Order.__name__} table was created successfully!")
     print(f"{OrderProduct.__name__} table was created successfully!")
     print(f"{Payment.__name__} table was created successfully!")
+    print(f"{Post.__name__} table was created successfully!")
     print(f"{Product.__name__} table was created successfully!")
     print(f"{RewardPoints.__name__} table was created successfully!")
     print(f"{Subscription.__name__} table was created successfully!")

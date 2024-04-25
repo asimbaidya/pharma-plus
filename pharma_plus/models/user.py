@@ -97,7 +97,7 @@ class User(db.Model):
                 profile_image=profile_image,
                 is_admin=user.type == "admin",
                 is_customer=user.type == "customer",
-                is_delivery_personnel=user.type == "delivery personnel",
+                is_delivery_personnel=user.type == "delivery_personnel",
             )
 
             # if user is customer, iniiate a cart, so customer can add products

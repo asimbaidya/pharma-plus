@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pharma_plus import db
 
 
@@ -17,3 +19,10 @@ class Notification(db.Model):
     message = db.Column(db.Text, nullable=False)
     mark_as_read = db.Column(db.Boolean, default=False)
     timestamp = db.Column(db.DateTime, nullable=False)
+
+
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    post = db.Column(db.Text, nullable=False)
+    customer = db.Column(db.Integer, db.ForeignKey("user.username"), nullable=False)

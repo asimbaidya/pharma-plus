@@ -61,6 +61,8 @@ def login():
         passsword = request.form["password"]
         user_type = request.form["user_type"]
 
+        print(user_type)
+
         login_success: bool = User.verify_login(
             username=username, password=passsword, user_type=user_type
         )

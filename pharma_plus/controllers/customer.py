@@ -16,4 +16,9 @@ def profile(username):
         return redirect(url_for("pharma_plus.home"))
 
     customer = User.query.filter_by(username=username).first()
-    return render_template("customer.html", preofile_image="", customer=customer)
+    profile_image = url_for(
+        "static", filename="media/customers/" + customer.profile_image
+    )
+    return render_template(
+        "customer.html", preofile_image=profile_image, customer=customer
+    )

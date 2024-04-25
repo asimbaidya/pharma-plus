@@ -15,10 +15,14 @@ def profile(username):
         flash("Unauthorized access blocked", "error")
         return redirect(url_for("pharma_plus.home"))
 
-    delivery_personnel = User.query.filter_by(username=username)
+    delivery_personnel = User.query.filter_by(username=username).first()
+    profile_image = url_for(
+        "static",
+        filename="media/delivery_personnels/" + delivery_personnel.profile_image,
+    )
 
     return render_template(
         "delivery_personnel.html",
-        profile_image="",
+        profile_image=profile_image,
         delivery_personnel=delivery_personnel,
     )
