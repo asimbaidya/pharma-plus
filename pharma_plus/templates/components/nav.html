@@ -76,7 +76,7 @@
             Order Report</a
           >
         </li>
-        <li>
+        <!-- <li>
           <a href="" class="inline-block p-4 text-center hover:bg-primary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -95,9 +95,9 @@
 
             Current Subscriptions</a
           >
-        </li>
-        <li>
-          <a href="" class="inline-block p-4 text-center hover:bg-primary">
+        </li> -->
+        <!-- <li>
+          <a href="{{ url_for('analytics.sells_analytics' ) }}" class="inline-block p-4 text-center hover:bg-primary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -111,9 +111,9 @@
             </svg>
             Sale Analytics</a
           >
-        </li>
+        </li> -->
         <li>
-          <a href="" class="inline-block p-4 text-center hover:bg-primary">
+          <a href="{{ url_for('analytics.all_inventories' ) }}" class="inline-block p-4 text-center hover:bg-primary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -132,7 +132,7 @@
           >
         </li>
         <li>
-          <a href="" class="inline-block p-4 text-center hover:bg-primary">
+          <a href="{{ url_for('analytics.expired_inventory' ) }}" class="inline-block p-4 text-center hover:bg-primary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -152,7 +152,7 @@
           >
         </li>
         <li>
-          <a href="" class="inline-block p-4 text-center hover:bg-primary">
+          <a href="{{ url_for('analytics.all_users' ) }}" class="inline-block p-4 text-center hover:bg-primary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -171,7 +171,7 @@
             Current Users of System</a
           >
         </li>
-        <li>
+        <!-- <li>
           <a href="" class="inline-block p-4 text-center hover:bg-primary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -190,7 +190,7 @@
 
             Add Delivery Delivery Personnel</a
           >
-        </li>
+        </li> -->
 
         {% elif session.current_user['_is_customer'] %}
 
