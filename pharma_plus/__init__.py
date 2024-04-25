@@ -21,13 +21,18 @@ def create_app(config_class=Config):
 
     # impurts all blueprint(rouutes)
     from pharma_plus.controllers.admin import admin
+    from pharma_plus.controllers.analytic import analytics
     from pharma_plus.controllers.cart import cart
     from pharma_plus.controllers.customer import customer
     from pharma_plus.controllers.delivery_personnel import delivery_personnel
+    from pharma_plus.controllers.feedback import feedbacks
+    from pharma_plus.controllers.notification import notifications
+    from pharma_plus.controllers.order import orders
     from pharma_plus.controllers.pharma_plus import pharma_plus
     from pharma_plus.controllers.post import posts
     from pharma_plus.controllers.products import products
     from pharma_plus.controllers.search import search
+    from pharma_plus.controllers.subscription import subscriptions
     from pharma_plus.controllers.users import users
 
     # register blueprint
@@ -40,6 +45,11 @@ def create_app(config_class=Config):
     app.register_blueprint(products)
     app.register_blueprint(search)
     app.register_blueprint(users)
+    app.register_blueprint(analytics)
+    app.register_blueprint(feedbacks)
+    app.register_blueprint(notifications)
+    app.register_blueprint(orders)
+    app.register_blueprint(subscriptions)
 
     from pharma_plus.models.other import (
         Feedback,

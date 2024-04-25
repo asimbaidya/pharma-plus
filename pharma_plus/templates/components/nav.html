@@ -57,7 +57,7 @@
           >
         </li>
         <li>
-          <a href="" class="inline-block p-4 text-center hover:bg-primary">
+          <a href="{{ url_for('orders.orders_report' ) }}" class="inline-block p-4 text-center hover:bg-primary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -240,7 +240,7 @@
           </a>
         </li>
         <li>
-          <a href="#todo" class="inline-block p-4 text-center hover:bg-primary">
+          <a href="{{ url_for('orders.active_orders', username=session.current_user['username']  ) }}" class="inline-block p-4 text-center hover:bg-primary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -259,7 +259,7 @@
           >
         </li>
         <li>
-          <a href="#todo" class="inline-block p-4 text-center hover:bg-primary">
+          <a href="{{ url_for('orders.order_history', username=session.current_user['username'] ) }}" class="inline-block p-4 text-center hover:bg-primary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -343,7 +343,7 @@
           >
         </li>
         <li>
-          <a href="#todo" class="inline-block p-4 text-center hover:bg-primary">
+          <a href="{{ url_for('orders.orders_in_progress' ,username=session.current_user['username']) }}" class="inline-block p-4 text-center hover:bg-primary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -363,7 +363,7 @@
           >
         </li>
         <li>
-          <a href="#todo" class="inline-block p-4 text-center hover:bg-primary">
+          <a href="{{ url_for('orders.delivery_history', username=session.current_user['username'] ) }}" class="inline-block p-4 text-center hover:bg-primary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

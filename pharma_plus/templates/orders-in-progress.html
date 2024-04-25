@@ -1,0 +1,43 @@
+{% extends 'components/layout.html' %} {% block content %}
+<div class="container mx-auto px-4 py-4 sm:px-6 lg:px-8">
+  <h1 class="text-2xl font-semibold text-gray-900">Orders in Progress</h1>
+  <div class="py-4">
+    {% for order in orders %}
+    <div class="mb-4 overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
+      <div class="px-4 py-5 sm:px-6">
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Order ID: {{ order.id }}</h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">Delivery Date: {{ order.order_delivery_date.strftime('%B %d, %Y') }}</p>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">Total Items: {{ order.total_items}}</p>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">Total Bills: {{ order.total_bill}}</p>
+        <!--  -->
+        <h1>{{order.verification_code}}</h1>
+      </div>
+      <div class="px-4 py-5 sm:p-0">
+        <dl class="sm:divide-y sm:divide-gray-200">
+          <!-- Additional order details can go here -->
+        </dl>
+      </div>
+      <form method="POST" action="{{ url_for('orders.complete_delivery', order_id=order.id) }}">
+        <div class="bg-gray-50 px-4 py-3 text-right">
+          <label for="verification_code" class="sr-only">Verification Code</label>
+          <input
+            type="text"
+            name="verification_code"
+            id="verification_code"
+            class="block w-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            placeholder="Verification Code"
+            required
+          />
+          <button
+            type="submit"
+            class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          >
+            Complete Delivery
+          </button>
+        </div>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

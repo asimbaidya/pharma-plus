@@ -16,4 +16,8 @@ def profile(username):
         return redirect(url_for("pharma_plus.home"))
 
     admin = User.query.filter_by(username=username).first()
-    return render_template("admin.html", profile_image="", admin=admin)
+    profile_image = url_for(
+        "static",
+        filename="media/delivery_personnels/" + admin.profile_image,
+    )
+    return render_template("admin.html", profile_image=profile_image, admin=admin)

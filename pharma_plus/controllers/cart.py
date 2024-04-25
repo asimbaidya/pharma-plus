@@ -131,6 +131,15 @@ def place_order():
         # products=products,
     )
 
+    # now find delivery personnels who are not busy and then assign
+    delivery_personnels = (
+        User.query.filter_by(type="delivery_personnel")
+        .order_by(asc(User.total_deliveries_in_progress))
+        .first()
+    )
+
+    order.delivery_personnel_id = delivery_personnels.id
+
     # add the order to the database session
     db.session.add(order)
     db.session.commit()
@@ -145,14 +154,6 @@ def place_order():
         db.session.add(order_product)
         db.session.commit()
 
-    # now find delivery personnels who are not busy and then assign
-    delivery_personnels = (
-        User.query.filter_by(type="delivery_personnel")
-        .order_by(asc(User.total_deliveries_in_progress))
-        .first()
-    )
-
-    order.delivery_personel_id = delivery_personnels.id
     session["cart"] = {}
 
     flash("Order Placed", "success")

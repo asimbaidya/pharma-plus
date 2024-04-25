@@ -106,9 +106,10 @@ class Order(db.Model):
     order_complated_timestamp = db.Column(db.DateTime, nullable=True)
     delivery_address = db.Column(db.String(255), nullable=False)
     phone_number = db.Column(db.String(20), nullable=False)
+    delivery_status = db.Column(db.String(20), nullable=False, default="Pending")
 
     customer_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-    delivery_personel_id = db.Column(
+    delivery_personnel_id = db.Column(
         db.Integer, db.ForeignKey("user.id"), nullable=True
     )
 
