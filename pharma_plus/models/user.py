@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import url_for
 from werkzeug.security import check_password_hash
 
@@ -127,6 +129,10 @@ class Subscription(db.Model):
     count = db.Column(db.DateTime, nullable=False)
     total_course = db.Column(db.Integer, nullable=False)
     active = db.Column(db.Boolean, default=True)
+
+    #   now
+    start_date = db.Column(db.DateTime, default=datetime.utcnow)
+    last_order_date = db.Column(db.DateTime, default=datetime.utcnow)
 
     products = db.relationship(
         "Product", secondary=subscription_product, backref="subscribers"

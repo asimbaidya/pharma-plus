@@ -2,6 +2,20 @@
 {% extends 'components/layout.html' %}
 {% block content %}
 
-<h1 class="p-10 text-center text-9xl text-primary">💊 Hello From About Page</h1>
+<img class="rounded-circle mx-auto mt-4 block max-w-3xl rounded-md" src="{{ url_for('static', filename='media/pharma_plus/pharma_plus.png') }}" />
+<div class="p-4">
+  <h1 class="text-brand-color text-center text-4xl font-extrabold">Welcome to Pharma_plus...</h1>
+</div>
+<div class="p-4">
+  <h1 class="text-brand-color text-center text-4xl">We Provide Easy interfaves and Services for Medicines and Suppliments</h1>
+</div>
+
+<!-- update title -->
+<script>
+  $(document).prop("title", "About");
+  console.log("title updated");
+
+  console.log("{{title}}");
+</script>
 
 {% endblock content%}
