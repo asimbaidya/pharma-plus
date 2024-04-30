@@ -20,5 +20,5 @@ def profile(username):
         "static", filename="media/customers/" + customer.profile_image
     )
     return render_template(
-        "customer.html", preofile_image=profile_image, customer=customer
+        "customer.html", profile_image=profile_image, customer=customer
     )
